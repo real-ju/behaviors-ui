@@ -1,0 +1,26 @@
+{
+  "name": "behaviors-ui",
+  "version": "1.0.1",
+  "description": "behaviors-ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/real-ju/behaviors-ui.git"
+  },
+  "keywords": [
+    "uni-app",
+    "uniapp",
+    "ui框架",
+    "组件库",
+    "component"
+  ],
+  "author": "real-ju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/real-ju/behaviors-ui/issues"
+  },
+  "homepage": "https://github.com/real-ju/behaviors-ui#readme"
+}

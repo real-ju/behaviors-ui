@@ -1,0 +1,106 @@
+<template>
+  <view
+    class="be-image"
+    :class="{
+      'height-fix': mode === 'heightFix',
+      'width-fix': mode === 'widthFix'
+    }"
+  >
+    <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad">
+    </image>
+    <template v-if="!ready">
+      <view class="mask" v-if="!customLoading">
+        <image class="icon" src="./assets/loading.png" />
+      </view>
+      <view class="custom-mask" v-else>
+        <slot name="loading"></slot>
+      </view>
+    </template>
+  </view>
+</template>
+
+<script>
+export default {
+  name: 'BeImage',
+  props: {
+    /**
+     * 以下为uni-app image组件属性
+     */
+    src: {
+      type: String,
+      default: ''
+    },
+    mode: {
+      type: String,
+      default: 'scaleToFill'
+    }
+  },
+  data() {
+    return {
+      ready: false,
+      customLoading: false
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    init() {
+      if (this.$slots.loading) {
+        this.customLoading = true;
+      }
+    },
+    onImgLoad(event) {
+      this.ready = true;
+    }
+  }
+};
+</script>
+
+<style lang="scss" scoped>
+.be-image {
+  display: inline-block;
+  font-size: 0px;
+  overflow: hidden;
+  position: relative;
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .icon {
+      width: 64rpx;
+      height: 64rpx;
+    }
+  }
+
+  .custom-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 14px;
+  }
+}
+
+.height-fix {
+  width: unset !important;
+}
+
+.width-fix {
+  height: unset !important;
+}
+</style>
