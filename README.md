@@ -18,7 +18,9 @@ npm install behaviors-ui
 import { Button } from 'behaviors-ui';
 Vue.use(Button);
 ```
+
 或者
+
 ```javascript
 import Button from 'behaviors-ui/be-button/index.vue';
 ```
