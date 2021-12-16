@@ -15,5 +15,12 @@ npm install behaviors-ui
 - 自行引入组件
 
 ```javascript
+import { Button } from 'behaviors-ui';
+Vue.use(Button);
+```
+
+或者
+
+```javascript
 import Button from 'behaviors-ui/be-button/index.vue';
 ```
