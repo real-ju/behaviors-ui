@@ -6,7 +6,7 @@
 /**
  * 阿里iconfont https://www.iconfont.cn/help/detail?spm=a313x.7781069.1998910419.d8d11a391&helptype=code
  *
- * 请自行引入FontClass css文件
+ * 请自行在全局引入FontClass css文件
  */
 export default {
   name: 'BeIcon',

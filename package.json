@@ -1,6 +1,6 @@
 {
   "name": "behaviors-ui",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "behaviors-ui",
   "main": "index.js",
   "scripts": {

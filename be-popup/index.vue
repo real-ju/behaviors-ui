@@ -82,7 +82,10 @@ export default {
     value(val) {
       if (val) {
         this.showPopup = true;
-        this.playStartAnimation();
+        // 兼容性：解决有几率出现不播放进入动画的问题
+        setTimeout(() => {
+          this.playStartAnimation();
+        }, 150);
       } else {
         this.playEndAnimation();
         setTimeout(() => {
@@ -228,6 +231,8 @@ export default {
 <style lang="scss" scoped>
 .be-popup {
   position: fixed;
+  top: 0px;
+  left: 0px;
   width: 100vw;
   height: 100vh;
   z-index: 9997;
