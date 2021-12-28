@@ -1,10 +1,12 @@
 <template>
   <view
-    class="be-image"
-    :class="{
-      'height-fix': mode === 'heightFix',
-      'width-fix': mode === 'widthFix'
-    }"
+    class="be-image be important"
+    :class="[
+      rootClass ? rootClass : '',
+      mode === 'heightFix' ? 'height-fix' : '',
+      mode === 'widthFix' ? 'width-fix' : ''
+    ]"
+    :style="rootStyle"
   >
     <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad">
     </image>
@@ -23,6 +25,21 @@
 export default {
   name: 'BeImage',
   props: {
+    /**
+     * 设置根元素class
+     * 1.在css选择器中需要加上.be.important提高优先级，如test.be.important
+     * 2.不支持scoped模式
+     */
+    rootClass: {
+      type: String,
+      default: ''
+    },
+    // 设置根元素style
+    rootStyle: {
+      type: String,
+      default: ''
+    },
+    
     /**
      * 以下为uni-app image组件属性
      */

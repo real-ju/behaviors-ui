@@ -1,5 +1,13 @@
 <template>
-  <view class="be-gesture" @touchstart="onTouchstart" @touchend="onTouchend">
+  <view
+    class="be-gesture be important"
+    :class="[
+      rootClass ? rootClass : ''
+    ]"
+    :style="rootStyle"
+    @touchstart="onTouchstart"
+    @touchend="onTouchend"
+  >
     <slot></slot>
   </view>
 </template>
@@ -8,6 +16,20 @@
 export default {
   name: 'BeGesture',
   props: {
+    /**
+     * 设置根元素class
+     * 1.在css选择器中需要加上.be.important提高优先级，如test.be.important
+     * 2.不支持scoped模式
+     */
+    rootClass: {
+      type: String,
+      default: ''
+    },
+    // 设置根元素style
+    rootStyle: {
+      type: String,
+      default: ''
+    },
     // 滑动多少距离触发手势
     triggerLevel: {
       type: Number,

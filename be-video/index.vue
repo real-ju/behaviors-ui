@@ -1,5 +1,11 @@
 <template>
-  <view class="be-video">
+  <view
+    class="be-video be important"
+    :class="[
+      rootClass ? rootClass : ''
+    ]"
+    :style="rootStyle"
+  >
     <view class="cover" v-if="!play" @click="play = true">
       <slot name="cover">
         <image class="bg" :src="imgSrc" mode="aspectFill"></image>
@@ -21,6 +27,20 @@ import defaultPlaySrc from './assets/video-play.png';
 export default {
   name: 'BeVideo',
   props: {
+    /**
+     * 设置根元素class
+     * 1.在css选择器中需要加上.be.important提高优先级，如test.be.important
+     * 2.不支持scoped模式
+     */
+    rootClass: {
+      type: String,
+      default: ''
+    },
+    // 设置根元素style
+    rootStyle: {
+      type: String,
+      default: ''
+    },
     imgSrc: {
       type: String,
       default: ''

@@ -1,5 +1,11 @@
 <template>
-  <view class="be-form">
+  <view
+    class="be-form be important"
+    :class="[
+      rootClass ? rootClass : ''
+    ]"
+    :style="rootStyle"
+  >
     <slot></slot>
   </view>
 </template>
@@ -13,6 +19,20 @@ let defaultModel = {},
 export default {
   name: 'BeForm',
   props: {
+    /**
+     * 设置根元素class
+     * 1.在css选择器中需要加上.be.important提高优先级，如test.be.important
+     * 2.不支持scoped模式
+     */
+    rootClass: {
+      type: String,
+      default: ''
+    },
+    // 设置根元素style
+    rootStyle: {
+      type: String,
+      default: ''
+    },
     model: {
       // 表单数据对象
       type: Object,

@@ -1,7 +1,12 @@
 <template>
   <button
-    class="be-button"
-    :class="{ [disabledClass]: disabled }"
+    class="be-button be important"
+    :class="[
+      rootClass ? rootClass : '',
+      disabled && !disabledClass ? 'button-disabled' : '',
+      disabled ? disabledClass : ''
+    ]"
+    :style="rootStyle"
     :hover-class="hoverClass"
     :loading="!loadingIcon && loading"
     :disabled="disabled"
@@ -37,6 +42,20 @@ export default {
     BeIcon
   },
   props: {
+    /**
+     * 设置根元素class
+     * 1.在css选择器中需要加上.be.important提高优先级，如test.be.important
+     * 2.不支持scoped模式
+     */
+    rootClass: {
+      type: String,
+      default: ''
+    },
+    // 设置根元素style
+    rootStyle: {
+      type: String,
+      default: ''
+    },
     // 默认点击效果
     hover: {
       type: Boolean,
@@ -126,9 +145,14 @@ export default {
 }
 
 .button-hover {
-  color: unset;
-  background-color: unset;
-  opacity: 0.9;
+  // color: unset;
+  // background-color: unset;
+  opacity: 0.9 !important;
+}
+
+.button-disabled {
+  color: rgba(0, 0, 0, 0.3) !important;
+  background-color: #f7f7f7 !important;
 }
 
 .loading-icon {
