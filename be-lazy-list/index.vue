@@ -10,7 +10,7 @@
       <slot v-if="listLength > 0"></slot>
       <slot v-if="showEmptyArea" name="empty">
         <view class="empty-tip">
-          <image class="icon" mode="widthFix" src="./assets/empty.png" />
+          <image class="icon" mode="widthFix" :src="assets_url_empty" />
           <view
             class="text"
             :style="{ 'font-size': emptyFontSize, color: emptyFontColor }"
@@ -48,7 +48,7 @@
       <slot v-if="listLength > 0"></slot>
       <slot v-if="showEmptyArea" name="empty">
         <view class="empty-tip">
-          <image class="icon" mode="widthFix" src="./assets/empty.png" />
+          <image class="icon" mode="widthFix" :src="assets_url_empty" />
           <view
             class="text"
             :style="{ 'font-size': emptyFontSize, color: emptyFontColor }"
@@ -83,6 +83,7 @@
 
 <script>
 import BeViewLoading from '../be-view-loading/index.vue';
+import assets_url_empty from './assets/empty.png';
 
 export default {
   name: 'BeLazyList',
@@ -162,7 +163,8 @@ export default {
       ready: false,
       loading: false,
       finished: false,
-      page: 1
+      page: 1,
+      assets_url_empty
     };
   },
   computed: {

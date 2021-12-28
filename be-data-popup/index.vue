@@ -8,7 +8,7 @@
     :mask-close-able="maskCloseAble"
   >
     <view class="header-bar">{{ title }}</view>
-    <image class="close-icon" src="./assets/close.png" @click="close" />
+    <image class="close-icon" :src="assets_url_close" @click="close" />
     <view class="data-content">
       <slot></slot>
     </view>
@@ -26,6 +26,7 @@
 <script>
 import BePopup from '../be-popup/index.vue';
 import BeButton from '../be-button/index.vue';
+import assets_url_close from './assets/close.png';
 
 export default {
   name: 'BeDataPopup',
@@ -65,7 +66,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      assets_url_close
+    };
   },
   methods: {
     onInput(value) {

@@ -11,7 +11,7 @@
       v-if="!iconName"
       class="icon"
       :style="{ width: iconSize, height: iconSize }"
-      src="./assets/loading.png"
+      :src="assets_url_loading"
     />
     <be-icon
       v-else
@@ -28,6 +28,7 @@
 
 <script>
 import BeIcon from '../be-icon/index.vue';
+import assets_url_loading from './assets/loading.png';
 
 export default {
   name: 'BeViewLoading',
@@ -64,6 +65,11 @@ export default {
       // 高度
       type: String,
       default: '100%'
+    }
+  },
+  data() {
+    return {
+      assets_url_loading
     }
   }
 };

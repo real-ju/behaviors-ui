@@ -12,7 +12,7 @@
     </image>
     <template v-if="!ready">
       <view class="mask" v-if="!customLoading">
-        <image class="icon" src="./assets/loading.png" />
+        <image class="icon" :src="assets_url_loading" />
       </view>
       <view class="custom-mask" v-else>
         <slot name="loading"></slot>
@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import assets_url_loading from './assets/loading.png';
+
 export default {
   name: 'BeImage',
   props: {
@@ -55,7 +57,8 @@ export default {
   data() {
     return {
       ready: false,
-      customLoading: false
+      customLoading: false,
+      assets_url_loading
     };
   },
   created() {
