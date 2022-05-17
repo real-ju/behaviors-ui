@@ -223,9 +223,14 @@ export default {
       default: "50rpx",
     },
     // 开启列表下拉刷新，仅代理模式下支持
-    showEmptyTip: {
+    pullDownRefresh: {
       type: Boolean,
       default: false,
+    },
+    // 下拉刷新时自动重置组件数据并初始化
+    resetWhileRefreshing: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -320,14 +325,18 @@ export default {
     },
     /**
      * 下拉刷新时间
-     * auto=true 表示自动重置列表
-     * auto=false 表示手动刷新 配合@refreshData、reset()、finishRefresh()使用
+     * resetWhileRefreshing=true 表示自动重置列表
+     * resetWhileRefreshing=false 表示手动刷新 配合@refreshData、reset()、loadMore()使用
      * 注：调用reset()后会自动关闭下拉刷新加载动画，无需再调用finishRefresh()
      */
-    refreshData(auto = true) {
+    refreshData() {
       this.triggered = true;
-      this.$emit("refreshData");
-      if (auto) {
+      this.$emit("refreshData", {
+        reset: this.reset,
+        loadMore: this.loadMore,
+        finishRefresh: this.finishRefresh,
+      });
+      if (this.resetWhileRefreshing) {
         this.reset();
       }
     },
