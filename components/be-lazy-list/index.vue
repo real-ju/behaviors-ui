@@ -273,19 +273,24 @@ export default {
        * page 当前页数
        * onLoadSuccess 加载成功时回调 传入当前页数据数组 为空或者不传则表示加载结束
        * onLoadError 加载失败时回调
-       * init 是否为第一次加载数据（初始化或者重置后）
+       * firstLoad 是否为首次加载数据（初始化或者重置后）
        */
       this.$emit(
         "load",
         this.page,
         this.onLoadSuccess,
         this.onLoadError,
-        !this.ready
+        this.firstLoad
       );
     },
     onLoadSuccess(datas) {
       if (datas && datas.length > 0) {
-        this.$emit("input", [...this.value, ...datas]);
+        if (this.firstLoad) {
+          this.$emit("input", datas);
+        } else {
+          this.$emit("input", [...this.value, ...datas]);
+        }
+
         this.page++;
       } else {
         this.finished = true;
@@ -295,9 +300,14 @@ export default {
 
       if (!this.ready) {
         this.ready = true;
-        if (this.triggered) {
-          this.triggered = false;
-        }
+      }
+
+      if (this.firstLoad) {
+        this.firstLoad = false;
+      }
+
+      if (this.triggered) {
+        this.triggered = false;
       }
     },
     onLoadError() {
@@ -305,18 +315,24 @@ export default {
 
       if (!this.ready) {
         this.ready = true;
-        if (this.triggered) {
-          this.triggered = false;
-        }
+      }
+
+      if (this.triggered) {
+        this.triggered = false;
       }
     },
     /**
      * 重置组件数据并初始化
+     * options.silent 静默重置（不显示加载提示）
      */
-    reset() {
-      this.$emit("input", []);
+    reset(options) {
+      options = options || { silent: false };
 
-      this.ready = false;
+      if (!options.silent) {
+        this.ready = false;
+      }
+
+      this.firstLoad = true;
       this.loading = false;
       this.finished = false;
       this.page = 1;
