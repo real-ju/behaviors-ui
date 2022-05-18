@@ -236,6 +236,7 @@ export default {
   data() {
     return {
       ready: false,
+      firstLoad: true,
       loading: false,
       finished: false,
       page: 1,
