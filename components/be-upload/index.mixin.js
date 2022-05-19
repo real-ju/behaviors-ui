@@ -241,7 +241,38 @@ export default {
         });
       }
     },
-    remove(file) {
+    /**
+     * 手动批量添加文件
+     * @param Array files
+     * 数组项规范：
+     * type: 'image' | 'video'
+     * name: String 文件名
+     * url: String 文件url
+     * status: 'local' | 'success' 文件状态，local表示未上传，success表示已上传成功
+     */
+    addFiles(files) {
+      if (!files || files.length === 0) {
+        throw "请配置files参数";
+      }
+
+      let _files = files.map((item) => {
+        let uuid = createUUID();
+        let status = item.status || "local";
+        let file = {
+          uuid,
+          type: item.type || "image",
+          name: item.name || uuid,
+          url: item.url,
+          status,
+          progress: status === "local" ? 0 : 100,
+        };
+
+        return file;
+      });
+
+      this.fileList.push(..._files);
+    },
+    removeFile(file) {
       let index = this.fileList.findIndex((item) => {
         return item.uuid === file.uuid;
       });
@@ -254,7 +285,7 @@ export default {
         }
       }
     },
-    clear() {
+    clearFiles() {
       this.fileList = [];
       this.updateModel();
     },

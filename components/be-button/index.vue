@@ -16,6 +16,7 @@
     :session-from="sessionFrom"
     @getphonenumber="onGetphonenumber"
     @getuserinfo="onGetuserinfo"
+    @chooseavatar="onChooseAvatar"
     @error="onError"
     @click="onClick"
   >
@@ -146,6 +147,9 @@ export default {
     },
     onGetuserinfo(...params) {
       this.$emit("getuserinfo", ...params);
+    },
+    onChooseAvatar(...params) {
+      this.$emit("chooseavatar", ...params);
     },
     onError(...params) {
       this.$emit("error", ...params);
