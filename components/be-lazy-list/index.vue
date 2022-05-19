@@ -294,6 +294,10 @@ export default {
 
         this.page++;
       } else {
+        if (this.firstLoad) {
+          this.$emit("input", []);
+        }
+
         this.finished = true;
       }
 
