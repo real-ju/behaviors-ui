@@ -266,6 +266,14 @@ export default {
         this.initSelectValue();
         this.initPickerDatas();
       }
+
+      if (
+        this.value === null ||
+        this.value === "" ||
+        (Array.isArray(this.value) && this.value.length === 0)
+      ) {
+        this.updateModelValue(); // 初始化v-model值
+      }
     },
     initPickerDatas() {
       if (this.mode === "single") {

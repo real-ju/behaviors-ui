@@ -73,7 +73,7 @@ export default {
     },
     confirmType: {
       type: String,
-      default: "done",
+      default: undefined,
     },
     showConfirmBar: {
       type: Boolean,

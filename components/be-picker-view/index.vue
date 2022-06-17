@@ -236,6 +236,13 @@ export default {
         this.initSelectList();
         this.initSelectValue();
       }
+
+      if (
+        this.value === "" ||
+        (Array.isArray(this.value) && this.value.length === 0)
+      ) {
+        this.onSelectViewInput(this.selectValue);
+      }
     },
     initLegalTimeRange() {
       let rangeObj = {};
