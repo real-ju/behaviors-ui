@@ -20,6 +20,7 @@
         borderRadius: contentBorderRadius,
         transform: contentTransform,
         top: contentTop,
+        paddingBottom: contentPaddingBottom,
       }"
       :animation="contentAnimationData"
       @click="onContentClick"
@@ -30,6 +31,10 @@
 </template>
 
 <script>
+import { getSafeAreaInsets } from "../../utils/layout";
+
+const safeAreaInsets = getSafeAreaInsets();
+
 export default {
   name: "BePopup",
   props: {
@@ -95,6 +100,11 @@ export default {
     screenBottomOffset: {
       type: String,
       default: "0px",
+    },
+    // position=bottom|left|right时是否开启底部内容安全区域
+    safeArea: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -206,6 +216,20 @@ export default {
       } else if (this.position === "custom") {
         return "0px";
       }
+    },
+    contentPaddingBottom() {
+      let bottom = 0;
+
+      if (
+        this.safeArea &&
+        (this.position === "bottom" ||
+          this.position === "left" ||
+          this.position === "right")
+      ) {
+        bottom = safeAreaInsets.bottom;
+      }
+
+      return `${bottom}px`;
     },
   },
   created() {
