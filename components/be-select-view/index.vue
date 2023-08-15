@@ -14,355 +14,392 @@
       :key="index1"
       :style="{ order: getColumnOrderStyle(index1) }"
     >
-      <view
-        class="picker-view-item"
-        v-for="(item, index2) in column"
-        :key="index2"
-      >
+      <view class="picker-view-item" v-for="(item, index2) in column" :key="index2">
         {{ item.label }}
       </view>
     </picker-view-column>
   </picker-view>
 </template>
 
-<script>
-let flatList = [];
+<script setup lang="ts">
+import type { PropType } from 'vue';
+
+import { ref, watch, nextTick } from 'vue';
+
+let flatList: Recordable[] = [];
 let flatItemId = 1;
 
-export default {
-  name: "BeSelectView",
-  props: {
-    value: {
-      type: [Number, String, Array],
-      default: null,
-    },
-    mode: {
-      type: String,
-      default: "single", // 可选 cascade 级联选择 multiple 多项选择
-    },
-    list: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-    // 自定义list数据的value属性名
-    valueName: {
-      type: String,
-      default: "value",
-    },
-    // 自定义list数据的label属性名
-    labelName: {
-      type: String,
-      default: "label",
-    },
-    // 自定义list数据的children属性名
-    childName: {
-      type: String,
-      default: "children",
-    },
-    width: {
-      type: String,
-      default: "100%",
-    },
-    height: {
-      type: String,
-      default: "400rpx",
-    },
-    indicatorStyle: {
-      type: String,
-      default: "height: 40px", // 不支持rpx
-    },
-    indicatorClass: {
-      type: String,
-      default: null,
-    },
-    maskStyle: {
-      type: String,
-      default: null,
-    },
-    maskClass: {
-      type: String,
-      default: null,
-    },
-    // 布局方式
-    layout: {
-      type: String,
-      default: "default", // 可选row-reverse 水平从右到左
-    },
+const props = defineProps({
+  modelValue: {
+    type: [Number, String, Array],
+    default: null
   },
-  data() {
-    return {
-      selectValue: [],
-      pickerDatas: [],
-      maxLevel: 0, // 级联选择层级
+  mode: {
+    type: String,
+    default: 'single' // 可选 cascade 级联选择 multiple 多项选择
+  },
+  list: {
+    type: Array as PropType<Recordable[]>,
+    default: () => {
+      return [];
+    }
+  },
+  // 自定义list数据的value属性名
+  valueName: {
+    type: String,
+    default: 'value'
+  },
+  // 自定义list数据的label属性名
+  labelName: {
+    type: String,
+    default: 'label'
+  },
+  // 自定义list数据的children属性名
+  childName: {
+    type: String,
+    default: 'children'
+  },
+  width: {
+    type: String,
+    default: '100%'
+  },
+  height: {
+    type: String,
+    default: '400rpx'
+  },
+  indicatorStyle: {
+    type: String,
+    default: 'height: 40px' // 不支持rpx
+  },
+  indicatorClass: {
+    type: String,
+    default: null
+  },
+  maskStyle: {
+    type: String,
+    default: null
+  },
+  maskClass: {
+    type: String,
+    default: null
+  },
+  // 布局方式
+  layout: {
+    type: String,
+    default: 'default' // 可选row-reverse 水平从右到左
+  }
+});
+
+const emit = defineEmits(['update:modelValue', 'change']);
+
+const selectValue = ref<any[]>([]);
+const pickerDatas = ref<any[]>([]);
+let maxLevel = 0; // 级联选择层级
+let updateViewLock = false;
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!updateViewLock) {
+      updateView();
+    }
+  }
+);
+
+watch(
+  [
+    () => props.mode,
+    () => props.list,
+    () => props.valueName,
+    () => props.labelName,
+    () => props.childName
+  ],
+  () => {
+    updateView();
+  }
+);
+
+// 从内部通过emit改变modelValue时，上锁，避免watch到其变化执行不必要的更新
+const lockUpdateView = () => {
+  updateViewLock = true;
+  setTimeout(() => {
+    updateViewLock = false;
+  }, 100);
+};
+
+const getColumnOrderStyle = (index: number) => {
+  return props.layout === 'row-reverse' ? pickerDatas.value.length - index : null;
+};
+
+// 重置v-model为默认值
+const clear = () => {
+  if (props.mode === 'single') {
+    emit('update:modelValue', null);
+  } else if (props.mode === 'multiple' || props.mode === 'cascade') {
+    emit('update:modelValue', []);
+  }
+};
+
+const updateModelValue = () => {
+  let newValue = selectValue.value.map((item, index) => {
+    let column = pickerDatas.value[index];
+    let data = column && column[item];
+
+    return data ? data.value : null;
+  });
+
+  if (newValue.indexOf(null) !== -1) {
+    return;
+  }
+
+  if (props.mode === 'single') {
+    newValue = newValue[0];
+  }
+
+  lockUpdateView();
+  emit('update:modelValue', newValue);
+};
+
+const onPickerChange = (event: any) => {
+  let newValue = event.detail.value;
+  let index = selectValue.value.findIndex((item, index) => {
+    return item !== newValue[index];
+  });
+  if (index !== -1) {
+    if (props.mode === 'single' || props.mode === 'multiple') {
+      selectValue.value = newValue;
+    } else if (props.mode === 'cascade') {
+      if (index < selectValue.value.length - 1) {
+        newValue.splice(
+          index + 1,
+          newValue.length - index - 1,
+          ...new Array(newValue.length - index - 1).fill(0)
+        );
+      }
+      selectValue.value = newValue;
+      updatePickerDatas(index);
+    }
+
+    updateModelValue();
+    emit('change', selectValue.value, index);
+  }
+};
+
+const initFlatList = () => {
+  flatList = [];
+  flatItemId = 1;
+
+  // 构建flatList
+  resolveDatas();
+
+  // 根据level排序
+  flatList.sort((a, b) => {
+    if (a.level < b.level) {
+      return -1;
+    }
+    if (a.level > b.level) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
+const resolveDatas = (datas?: Recordable[], parentId = 0, level = 1) => {
+  if (!datas) {
+    datas = props.list;
+  }
+
+  datas.forEach((item) => {
+    let flatItem = {
+      id: flatItemId++,
+      value: item[props.valueName],
+      label: item[props.labelName],
+      parentId,
+      level
     };
-  },
-  created() {
-    this.init();
-  },
-  methods: {
-    getColumnOrderStyle(index) {
-      return this.layout === "row-reverse"
-        ? this.pickerDatas.length - index
-        : null;
-    },
-    // 重置v-model为默认值
-    clear() {
-      if (this.mode === "single") {
-        this.$emit("input", null);
-      } else if (this.mode === "multiple" || this.mode === "cascade") {
-        this.$emit("input", []);
-      }
-    },
-    updateModelValue() {
-      let newValue = this.selectValue.map((item, index) => {
-        let column = this.pickerDatas[index];
-        let data = column && column[item];
 
-        return data ? data.value : null;
+    flatList.push(flatItem);
+
+    let children = item[props.childName];
+
+    if (children) {
+      resolveDatas(children, flatItem.id, level + 1);
+    }
+  });
+};
+
+// 级联选择模式
+const updatePickerDatas = (columnIndex = -1) => {
+  // index 表示pickerDatas项的序号
+  for (let index = 0; index < maxLevel; index++) {
+    if (index > columnIndex) {
+      let column = pickerDatas.value[index];
+
+      let beforeColumn = pickerDatas.value[index - 1];
+      let beforeSelectIndex = selectValue.value[index - 1];
+      let parentId: number;
+      if (index === 0) {
+        parentId = 0;
+      } else {
+        let beforeData = beforeColumn[beforeSelectIndex];
+        if (!beforeData) {
+          break;
+        }
+        parentId = beforeData.id;
+      }
+
+      let datas = flatList.filter((item) => {
+        return item.parentId === parentId;
       });
 
-      if (newValue.indexOf(null) !== -1) {
-        return;
+      if (!column) {
+        pickerDatas.value.push(datas);
+      } else {
+        pickerDatas.value.splice(index, 1, datas);
       }
+    }
+  }
+};
 
-      if (this.mode === "single") {
-        newValue = newValue[0];
-      }
+const updateSingleColumn = (index: number, columnDatas: Recordable[]) => {
+  if (props.mode === 'multiple') {
+    const datas = columnDatas.map((item) => {
+      return {
+        value: item[props.valueName],
+        label: item[props.labelName]
+      };
+    });
+    pickerDatas.value.splice(index, 1, datas);
+  }
+};
 
-      this.$emit("input", newValue);
-    },
-    onPickerChange(event) {
-      let newValue = event.detail.value;
-      let index = this.selectValue.findIndex((item, index) => {
-        return item !== newValue[index];
-      });
-      if (index !== -1) {
-        if (this.mode === "single" || this.mode === "multiple") {
-          this.selectValue = newValue;
-        } else if (this.mode === "cascade") {
-          if (index < this.selectValue.length - 1) {
-            newValue.splice(
-              index + 1,
-              newValue.length - index - 1,
-              ...new Array(newValue.length - index - 1).fill(0)
-            );
-          }
-          this.selectValue = newValue;
-          this.updatePickerDatas(index);
-        }
+/**
+ * 某些props在改变后需要重新初始化（更新视图）
+ * 比如在网络异步获取v-model绑定值或者动态改变mode、list的场景
+ */
+const updateView = () => {
+  nextTick(() => {
+    init();
+  });
+};
 
-        this.updateModelValue();
-        this.$emit("change", this.selectValue, index);
-      }
-    },
-    initFlatList() {
-      flatList = [];
-      flatItemId = 1;
+const init = () => {
+  if (props.list.length === 0) {
+    selectValue.value = [];
+    pickerDatas.value = [];
+    return;
+  }
 
-      // 构建flatList
-      this.resolveDatas();
+  if (props.mode === 'single' || props.mode === 'multiple') {
+    initPickerDatas();
+    initSelectValue();
+  } else if (props.mode === 'cascade') {
+    initFlatList();
+    maxLevel = flatList[flatList.length - 1].level;
+    initSelectValue();
+    initPickerDatas();
+  }
+};
 
-      // 根据level排序
-      flatList.sort((a, b) => {
-        if (a.level < b.level) {
-          return -1;
-        }
-        if (a.level > b.level) {
-          return 1;
-        }
-        return 0;
-      });
-    },
-    resolveDatas(datas, parentId = 0, level = 1) {
-      if (!datas) {
-        datas = this.list;
-      }
-
-      datas.forEach((item) => {
-        let flatItem = {
-          id: flatItemId++,
-          value: item[this.valueName],
-          label: item[this.labelName],
-          parentId,
-          level,
+const initPickerDatas = () => {
+  if (props.mode === 'single') {
+    let column = props.list.map((item) => {
+      return {
+        value: item[props.valueName],
+        label: item[props.labelName]
+      };
+    });
+    pickerDatas.value = [column];
+  } else if (props.mode === 'multiple') {
+    let datas: any[] = [];
+    props.list.forEach((item) => {
+      let column = item.map((data: Recordable) => {
+        return {
+          value: data[props.valueName],
+          label: data[props.labelName]
         };
-
-        flatList.push(flatItem);
-
-        let children = item[this.childName];
-
-        if (children) {
-          this.resolveDatas(children, flatItem.id, level + 1);
-        }
       });
-    },
-    // 级联选择模式
-    updatePickerDatas(columnIndex = -1) {
-      // index 表示pickerDatas项的序号
-      for (let index = 0; index < this.maxLevel; index++) {
-        if (index > columnIndex) {
-          let column = this.pickerDatas[index];
+      datas.push(column);
+    });
+    pickerDatas.value = datas;
+  } else if (props.mode === 'cascade') {
+    updatePickerDatas();
+  }
+};
 
-          let beforeColumn = this.pickerDatas[index - 1];
-          let beforeSelectIndex = this.selectValue[index - 1];
-          let parentId;
-          if (index === 0) {
-            parentId = 0;
-          } else {
-            let beforeData = beforeColumn[beforeSelectIndex];
-            if (!beforeData) {
-              break;
-            }
-            parentId = beforeData.id;
-          }
+const initSelectValue = () => {
+  if (props.mode === 'single') {
+    let index = pickerDatas.value[0].findIndex((item: Recordable) => {
+      return item.value === props.modelValue;
+    });
+    if (index === -1) {
+      index = 0;
+    }
 
-          let datas = flatList.filter((item) => {
-            return item.parentId === parentId;
-          });
-
-          if (!column) {
-            this.pickerDatas.push(datas);
-          } else {
-            this.pickerDatas.splice(index, 1, datas);
-          }
-        }
-      }
-    },
-    updateSingleColumn(index, columnDatas) {
-      if (this.mode === "multiple") {
-        const datas = columnDatas.map((item) => {
-          return {
-            value: item[this.valueName],
-            label: item[this.labelName],
-          };
-        });
-        this.pickerDatas.splice(index, 1, datas);
-      }
-    },
-    /**
-     * 由于性能原因，props不会在改变后重新初始化（更新视图），需要自行调用updateView()
-     * 比如在网络异步获取v-model绑定值或者动态改变mode、list的场景
-     */
-    updateView() {
-      this.$nextTick(() => {
-        this.init();
+    selectValue.value = [index];
+  } else if (props.mode === 'multiple') {
+    let indexes = pickerDatas.value.map((item, index) => {
+      let rstIndex = item.findIndex((data: Recordable) => {
+        return data.value === (props.modelValue as Recordable[])[index];
       });
-    },
-    init() {
-      if (this.list.length === 0) {
-        this.selectValue = [];
-        this.pickerDatas = [];
-        return;
+      if (rstIndex === -1) {
+        rstIndex = 0;
       }
 
-      if (this.mode === "single" || this.mode === "multiple") {
-        this.initPickerDatas();
-        this.initSelectValue();
-      } else if (this.mode === "cascade") {
-        this.initFlatList();
-        this.maxLevel = flatList[flatList.length - 1].level;
-        this.initSelectValue();
-        this.initPickerDatas();
-      }
+      return rstIndex;
+    });
 
-      if (
-        this.value === null ||
-        this.value === "" ||
-        (Array.isArray(this.value) && this.value.length === 0)
-      ) {
-        this.updateModelValue(); // 初始化v-model值
-      }
-    },
-    initPickerDatas() {
-      if (this.mode === "single") {
-        let column = this.list.map((item) => {
-          return {
-            value: item[this.valueName],
-            label: item[this.labelName],
-          };
-        });
-        this.pickerDatas = [column];
-      } else if (this.mode === "multiple") {
-        let datas = [];
-        this.list.forEach((item) => {
-          let column = item.map((data) => {
-            return {
-              value: data[this.valueName],
-              label: data[this.labelName],
-            };
+    selectValue.value = indexes;
+  } else if (props.mode === 'cascade') {
+    if (props.modelValue === null || (props.modelValue as Recordable[]).length === 0) {
+      selectValue.value = new Array(maxLevel).fill(0);
+    } else {
+      let indexes = [];
+      let datas = []; // 所选数据项(临时)
+      for (let index = 0; index < maxLevel; index++) {
+        let value = (props.modelValue as Recordable[])[index];
+        if (value === undefined) {
+          break;
+        } else {
+          let level = index + 1;
+          let parentId = 0;
+          if (level > 1) {
+            parentId = datas[index - 1].id;
+          }
+          let list = flatList.filter((data) => {
+            return data.parentId === parentId;
           });
-          datas.push(column);
-        });
-        this.pickerDatas = datas;
-      } else if (this.mode === "cascade") {
-        this.updatePickerDatas();
-      }
-    },
-    initSelectValue() {
-      if (this.mode === "single") {
-        let index = this.pickerDatas[0].findIndex((item) => {
-          return item.value === this.value;
-        });
-        if (index === -1) {
-          index = 0;
-        }
-
-        this.selectValue = [index];
-      } else if (this.mode === "multiple") {
-        let indexes = this.pickerDatas.map((item, index) => {
-          let rstIndex = item.findIndex((data) => {
-            return data.value === this.value[index];
+          let rstIndex = list.findIndex((data) => {
+            return data.value === value;
           });
           if (rstIndex === -1) {
-            rstIndex = 0;
+            break;
           }
 
-          return rstIndex;
-        });
-
-        this.selectValue = indexes;
-      } else if (this.mode === "cascade") {
-        if (this.value === null || this.value.length === 0) {
-          this.selectValue = new Array(this.maxLevel).fill(0);
-        } else {
-          let indexes = [];
-          let datas = []; // 所选数据项(临时)
-          for (let index = 0; index < this.maxLevel; index++) {
-            let value = this.value[index];
-            if (value === undefined) {
-              break;
-            } else {
-              let level = index + 1;
-              let parentId = 0;
-              if (level > 1) {
-                parentId = datas[index - 1].id;
-              }
-              let list = flatList.filter((data) => {
-                return data.parentId === parentId;
-              });
-              let rstIndex = list.findIndex((data) => {
-                return data.value === value;
-              });
-              if (rstIndex === -1) {
-                break;
-              }
-
-              indexes.push(rstIndex);
-              datas.push(list[rstIndex]);
-            }
-          }
-          if (indexes.length < this.maxLevel) {
-            indexes = indexes.concat(
-              new Array(this.maxLevel - indexes.length).fill(0)
-            );
-          }
-          this.selectValue = indexes;
+          indexes.push(rstIndex);
+          datas.push(list[rstIndex]);
         }
       }
-    },
-  },
+      if (indexes.length < maxLevel) {
+        indexes = indexes.concat(new Array(maxLevel - indexes.length).fill(0));
+      }
+      selectValue.value = indexes;
+    }
+  }
+  updateModelValue();
+};
+
+init();
+
+defineExpose({
+  updateSingleColumn,
+  clear
+});
+</script>
+
+<script lang="ts">
+export default {
+  name: 'BeSelectView'
 };
 </script>
 

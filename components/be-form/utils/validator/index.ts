@@ -1,19 +1,20 @@
 // 表单验证器
+import preset from './rules';
 
-import preset from "./rules";
+import type { ErrorField, Rules, RuleDescription, CustomValidator } from './types';
 
 export default {
   validate,
   single,
-  match,
+  match
 };
 
-function validate(obj, rules) {
-  if (typeof obj != "object" || typeof rules != "object") {
+function validate(obj: Recordable, rules: Rules): ErrorField[] | true {
+  if (typeof obj != 'object' || typeof rules != 'object') {
     throw `validate()参数错误`;
   }
 
-  let errorFields = [];
+  let errorFields: ErrorField[] = [];
 
   for (let key in obj) {
     let fieldRules = rules[key],
@@ -25,10 +26,10 @@ function validate(obj, rules) {
       }
 
       let rst = single(currentVal, fieldRules);
-      if (typeof rst == "string") {
+      if (typeof rst == 'string') {
         errorFields.push({
           field: key,
-          message: rst,
+          message: rst
         });
       }
     }
@@ -41,9 +42,9 @@ function validate(obj, rules) {
   }
 }
 
-function single(value, rules) {
-  let rst = true,
-    errorMsg = "验证未通过";
+function single(value: any, rules: RuleDescription[]): string | true {
+  let rst: boolean | string = true,
+    errorMsg: string = '验证未通过';
 
   if (!(rules instanceof Array)) {
     throw `single()规则格式错误`;
@@ -51,8 +52,9 @@ function single(value, rules) {
 
   for (let index = 0; index < rules.length; index++) {
     const item = rules[index];
-    if ("required" in item) {
-      if (item.required && String(value) == "") {
+
+    if ('required' in item) {
+      if (item.required && String(value) == '') {
         if (item.message) {
           errorMsg = item.message;
         }
@@ -62,7 +64,7 @@ function single(value, rules) {
       }
     } else if (item.rule) {
       let matchRst = match(String(value), item.rule);
-      if (typeof matchRst == "string" || matchRst === false) {
+      if (typeof matchRst == 'string') {
         if (item.message) {
           errorMsg = item.message;
         } else {
@@ -72,16 +74,16 @@ function single(value, rules) {
         rst = errorMsg;
         break;
       }
-    } else if ("validator" in item) {
+    } else if ('validator' in item) {
       // validator字段为自定义验证器，参数为字段值，返回true或者错误信息字符串
-      let customValidate = item.validator,
+      let customValidate = item.validator as CustomValidator,
         customRst = customValidate(value);
 
-      if (typeof customRst == "string" || customRst === false) {
+      if (typeof customRst == 'string' || customRst === false) {
         if (item.message) {
           errorMsg = item.message;
         } else {
-          errorMsg = customRst;
+          errorMsg = String(customRst);
         }
 
         rst = errorMsg;
@@ -93,13 +95,13 @@ function single(value, rules) {
   return rst;
 }
 
-function match(value, rule) {
-  let pattern = null,
-    errorMsg = "验证未通过";
+function match(value: string, rule: RegExp | string): string | true {
+  let pattern: RegExp | null = null,
+    errorMsg: string = '验证未通过';
 
   if (rule instanceof RegExp) {
     pattern = rule;
-  } else if (typeof rule == "string") {
+  } else if (typeof rule == 'string') {
     let item = preset[rule];
     if (!item) {
       throw `没有找到预置验证规则"${rule}"`;

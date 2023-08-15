@@ -1,18 +1,17 @@
 <template>
   <view
-    class="be-image be important"
+    class="be-image be deep"
     :class="[
       rootClass ? rootClass : '',
       mode === 'heightFix' ? 'height-fix' : '',
-      mode === 'widthFix' ? 'width-fix' : '',
+      mode === 'widthFix' ? 'width-fix' : ''
     ]"
     :style="rootStyle"
   >
-    <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad">
-    </image>
+    <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad"> </image>
     <template v-if="!ready">
       <view class="mask" v-if="!customLoading">
-        <image class="icon" :src="assets_url_loading" />
+        <image class="icon" :src="assetsUrlLoading" />
       </view>
       <view class="custom-mask" v-else>
         <slot name="loading"></slot>
@@ -21,55 +20,56 @@
   </view>
 </template>
 
-<script>
-import assets_url_loading from "./assets/loading.png";
+<script setup lang="ts">
+import { ref, useSlots } from 'vue';
+import assetsUrlLoading from './assets/loading.png';
 
+const props = defineProps({
+  // 设置根元素class
+  rootClass: {
+    type: String,
+    default: ''
+  },
+  // 设置根元素style
+  rootStyle: {
+    type: String,
+    default: ''
+  },
+
+  /**
+   * 以下为uni-app image组件属性
+   */
+  src: {
+    type: String,
+    default: ''
+  },
+  mode: {
+    type: String,
+    default: 'scaleToFill'
+  }
+});
+
+const slots = useSlots();
+
+const ready = ref(false);
+const customLoading = ref(false);
+
+const init = () => {
+  if (slots.loading) {
+    customLoading.value = true;
+  }
+};
+
+const onImgLoad = (event: any) => {
+  ready.value = true;
+};
+
+init();
+</script>
+
+<script lang="ts">
 export default {
-  name: "BeImage",
-  props: {
-    // 设置根元素class
-    rootClass: {
-      type: String,
-      default: "",
-    },
-    // 设置根元素style
-    rootStyle: {
-      type: String,
-      default: "",
-    },
-
-    /**
-     * 以下为uni-app image组件属性
-     */
-    src: {
-      type: String,
-      default: "",
-    },
-    mode: {
-      type: String,
-      default: "scaleToFill",
-    },
-  },
-  data() {
-    return {
-      ready: false,
-      customLoading: false,
-      assets_url_loading,
-    };
-  },
-  created() {
-    this.init();
-  },
-  methods: {
-    init() {
-      if (this.$slots.loading) {
-        this.customLoading = true;
-      }
-    },
-    onImgLoad(event) {
-      this.ready = true;
-    },
-  },
+  name: 'BeImage'
 };
 </script>
 

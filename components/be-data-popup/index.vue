@@ -1,109 +1,114 @@
 <template>
-  <be-popup
+  <BePopup
     class="be-data-popup"
-    :value="value"
-    @input="onInput"
+    :style="{ '--theme-color': theme }"
+    :visible="visible"
+    @update:visible="onVisibleUpdate"
     @close="onInnerPopupClose"
     position="bottom"
     :height="height"
     :mask-close-able="maskCloseAble"
   >
     <view class="header-bar">{{ title }}</view>
-    <image class="close-icon" :src="assets_url_close" @click="close" />
+    <image class="close-icon" :src="assetsUrlClose" @click="close" />
     <view class="data-content">
       <slot></slot>
     </view>
     <view class="action-bar" :class="{ 'sink-bottom': actionBarSinkStatus }">
-      <be-button root-class="btn clear-btn" @click="clear">
+      <BeButton class="btn-comp" root-class="btn clear-btn" @click="clear">
         {{ clearText }}
-      </be-button>
-      <be-button root-class="btn ok-btn" @click="confirm">
+      </BeButton>
+      <BeButton class="btn-comp" root-class="btn ok-btn" hover @click="confirm">
         {{ confirmText }}
-      </be-button>
+      </BeButton>
     </view>
-  </be-popup>
+  </BePopup>
 </template>
 
-<script>
-import BePopup from "../be-popup/index.vue";
-import BeButton from "../be-button/index.vue";
-import assets_url_close from "./assets/close.png";
+<script setup lang="ts">
+import { computed } from 'vue';
+import BePopup from '../be-popup/index.vue';
+import BeButton from '../be-button/index.vue';
+import assetsUrlClose from './assets/close.png';
 
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: false
+  },
+  height: {
+    type: String,
+    default: 'unset'
+  },
+  title: {
+    type: String,
+    default: ''
+  },
+  clearText: {
+    type: String,
+    default: '清空'
+  },
+  confirmText: {
+    type: String,
+    default: '确定'
+  },
+  maskCloseAble: {
+    type: Boolean,
+    default: true
+  },
+  // 点击确定或清空按钮后关闭弹出层
+  actionCloseAble: {
+    type: Boolean,
+    default: true
+  },
+  // 主题色
+  theme: {
+    type: String,
+    default: '#2979ff'
+  }
+});
+
+const emit = defineEmits(['update:visible', 'close', 'clear', 'confirm']);
+
+const actionBarSinkStatus = computed(() => {
+  return props.height !== 'unset' && props.height !== 'auto';
+});
+
+const onVisibleUpdate = (value: boolean) => {
+  emit('update:visible', value);
+};
+
+const onInnerPopupClose = () => {
+  emit('close');
+};
+
+const close = () => {
+  emit('update:visible', false);
+  emit('close');
+};
+
+const clear = () => {
+  emit('clear');
+  if (props.actionCloseAble) {
+    close();
+  }
+};
+
+const confirm = () => {
+  emit('confirm');
+  if (props.actionCloseAble) {
+    close();
+  }
+};
+</script>
+
+<script lang="ts">
 export default {
-  name: "BeDataPopup",
-  components: {
-    BePopup,
-    BeButton,
-  },
-  props: {
-    value: {
-      type: Boolean,
-      default: false,
-    },
-    height: {
-      type: String,
-      default: "unset",
-    },
-    title: {
-      type: String,
-      default: "",
-    },
-    clearText: {
-      type: String,
-      default: "清空",
-    },
-    confirmText: {
-      type: String,
-      default: "确定",
-    },
-    maskCloseAble: {
-      type: Boolean,
-      default: true,
-    },
-    // 点击确定或清空按钮后关闭弹出层
-    actionCloseAble: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data() {
-    return {
-      assets_url_close,
-    };
-  },
-  computed: {
-    actionBarSinkStatus() {
-      return this.height !== "unset" && this.height !== "auto";
-    },
-  },
-  methods: {
-    onInput(value) {
-      this.$emit("input", value);
-    },
-    onInnerPopupClose() {
-      this.$emit("close");
-    },
-    close() {
-      this.$emit("input", false);
-      this.$emit("close");
-    },
-    clear() {
-      this.$emit("clear");
-      if (this.actionCloseAble) {
-        this.close();
-      }
-    },
-    confirm() {
-      this.$emit("confirm");
-      if (this.actionCloseAble) {
-        this.close();
-      }
-    },
-  },
-  // !如何需要修改子组件样式则配置此项
+  name: 'BeDataPopup',
+  // 微信小程序如果需要修改子组件样式则配置此项
   options: {
-    styleIsolation: "shared", // uni组件的默认值是apply-shared
-  },
+    styleIsolation: 'shared' // uni组件的默认值是apply-shared
+  }
 };
 </script>
 
@@ -135,7 +140,14 @@ export default {
   .action-bar {
     width: 100%;
     padding: 30rpx;
-    padding-bottom: calc(40rpx + 20rpx); // 处理内容安全下边距 20rpx
+    /* #ifdef MP-WEIXIN */
+    padding-bottom: calc(30rpx + 20rpx); // 处理内容安全下边距 20rpx
+    /* #endif */
+    /* #ifdef H5 */
+    padding-bottom: calc(
+      30rpx + var(--window-bottom)
+    ); // 处理内容安全下边距 --window-bottom等于tabbar高度
+    /* #endif */
     display: flex;
     justify-content: space-between;
     background-color: #ffffff;
@@ -146,13 +158,20 @@ export default {
       left: 0rpx;
     }
 
+    /* #ifdef MP-WEIXIN */
     be-button {
       width: calc((100% - 30rpx) / 2);
     }
+    /* #endif */
 
-    ::v-deep {
+    :deep {
       .btn {
+        /* #ifdef MP-WEIXIN */
         width: 100%;
+        /* #endif */
+        /* #ifdef H5 */
+        width: calc((100% - 30rpx) / 2);
+        /* #endif */
         height: 70rpx;
         border-radius: 50rpx;
         text-align: center;
@@ -169,13 +188,9 @@ export default {
       }
 
       .ok-btn {
-        background-color: #2979ff;
+        background-color: var(--theme-color);
         color: #ffffff;
         font-weight: bold;
-
-        &:not([disabled]):active {
-          background-color: darken(#2979ff, 5%);
-        }
       }
     }
   }

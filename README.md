@@ -1,5 +1,11 @@
 # behaviors-ui
 
+### 环境要求
+
+- uni-app
+- vue3
+- ts
+
 ### 安装
 
 npm install behaviors-ui
@@ -15,13 +21,13 @@ npm install behaviors-ui
 - 自行引入组件
 
 ```javascript
-import { Button } from "behaviors-ui";
+import { Button } from 'behaviors-ui';
 Vue.use(Button);
 ```
 
 或者
 
 ```javascript
-import Button from "behaviors-ui/components/be-button/index.vue";
-Vue.component("be-button", Button);
+import { Button } from 'behaviors-ui';
+Vue.component('be-button', Button);
 ```

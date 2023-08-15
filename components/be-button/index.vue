@@ -1,14 +1,14 @@
 <template>
   <button
-    class="be-button be important"
+    class="be-button be deep"
     :class="[
       rootClass ? rootClass : '',
       disabled && !disabledClass ? 'button-disabled' : '',
       disabled ? disabledClass : '',
-      loading ? 'button-loading' : '',
+      loading ? 'button-loading' : ''
     ]"
     :style="rootStyle"
-    :hover-class="hoverClass"
+    :hover-class="btnHoverClass"
     :loading="!isCustomLoadingIcon && loading"
     :disabled="disabled"
     :data-loading="loading"
@@ -16,12 +16,11 @@
     :session-from="sessionFrom"
     @getphonenumber="onGetphonenumber"
     @getuserinfo="onGetuserinfo"
-    @chooseavatar="onChooseAvatar"
     @error="onError"
     @click="onClick"
   >
     <slot name="loading" v-if="loading">
-      <be-icon
+      <BeIcon
         v-if="loadingIcon && loadingIcon.name"
         class="loading-icon"
         :fontFamily="loadingIconProps.fontFamily"
@@ -30,136 +29,141 @@
         :style="{
           'font-size': loadingSize,
           color: loadingColor,
-          display: 'inline-block',
+          display: 'inline-block'
         }"
       >
-      </be-icon>
+      </BeIcon>
     </slot>
     <slot v-if="!(hiddenContentInLoading && loading)"></slot>
   </button>
 </template>
 
-<script>
-import BeIcon from "../be-icon/index.vue";
+<script setup lang="ts">
+import { computed, useSlots } from 'vue';
+import BeIcon from '../be-icon/index.vue';
+import { defaultLoadingIconProps } from './constant';
 
-const defaultLoadingIconProps = {
-  fontFamily: "iconfont",
-  prefix: "icon-",
-  name: "",
+const props = defineProps({
+  /**
+   * 设置根元素class
+   * 1.非scoped模式，需要在css选择器中加上.be.important提高优先级，如test.be.important
+   * 2.scoped模式，使用:deep样式穿透
+   */
+  rootClass: {
+    type: String,
+    default: ''
+  },
+  // 设置根元素style
+  rootStyle: {
+    type: String,
+    default: ''
+  },
+  // 默认点击效果
+  hover: {
+    type: Boolean,
+    default: false
+  },
+  // 自定义点击样式
+  hoverClass: {
+    type: String,
+    default: ''
+  },
+  // 按钮加载状态(加载时会添加data-loading属性，可用于样式控制)
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  // 加载时隐藏按钮内容
+  hiddenContentInLoading: {
+    type: Boolean,
+    default: false
+  },
+  // 自定义加载图标 Icon组件 props
+  loadingIcon: {
+    type: Object,
+    default: () => {
+      return { ...defaultLoadingIconProps };
+    }
+  },
+  // 自定义加载图标大小 font-size值
+  loadingSize: {
+    type: String,
+    default: 'unset'
+  },
+  // 自定义加载图标颜色 color值
+  loadingColor: {
+    type: String,
+    default: 'unset'
+  },
+  // 按钮禁用状态
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  // 自定义按钮禁用样式
+  disabledClass: {
+    type: String,
+    default: ''
+  },
+
+  /**
+   * 以下为uni-app button组件属性
+   */
+  openType: {
+    type: String,
+    default: ''
+  },
+  sessionFrom: {
+    type: String,
+    default: ''
+  }
+});
+
+const emit = defineEmits(['getphonenumber', 'getuserinfo', 'error', 'click']);
+
+const slots = useSlots();
+
+const isCustomLoadingIcon = computed(() => {
+  return (props.loadingIcon && props.loadingIcon.name) || slots.loading;
+});
+
+const loadingIconProps = computed<Recordable>(() => {
+  if (!props.loadingIcon) {
+    return {};
+  }
+
+  return {
+    ...defaultLoadingIconProps,
+    ...props.loadingIcon
+  };
+});
+
+const btnHoverClass = computed(() => {
+  return props.hover ? (props.hoverClass ? props.hoverClass : 'button-hover') : 'none';
+});
+
+const onGetphonenumber = (...params: any[]) => {
+  emit('getphonenumber', ...params);
 };
 
+const onGetuserinfo = (...params: any[]) => {
+  emit('getuserinfo', ...params);
+};
+
+const onError = (...params: any[]) => {
+  emit('error', ...params);
+};
+
+const onClick = (event: any) => {
+  if (!props.loading) {
+    emit('click', event);
+  }
+};
+</script>
+
+<script lang="ts">
 export default {
-  name: "BeButton",
-  components: {
-    BeIcon,
-  },
-  props: {
-    /**
-     * 设置根元素class
-     * 1.非scoped模式，需要在css选择器中加上.be.important提高优先级，如test.be.important
-     * 2.scoped模式，使用::v-deep样式穿透
-     */
-    rootClass: {
-      type: String,
-      default: "",
-    },
-    // 设置根元素style
-    rootStyle: {
-      type: String,
-      default: "",
-    },
-    // 默认点击效果
-    hover: {
-      type: Boolean,
-      default: false,
-    },
-    // 按钮加载状态(加载时会添加data-loading属性，可用于样式控制)
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-    // 加载时隐藏按钮内容
-    hiddenContentInLoading: {
-      type: Boolean,
-      default: false,
-    },
-    // 自定义加载图标 Icon组件 props
-    loadingIcon: {
-      type: Object,
-      default: () => {
-        return { ...defaultLoadingIconProps };
-      },
-    },
-    // 自定义加载图标大小 font-size值
-    loadingSize: {
-      type: String,
-      default: "unset",
-    },
-    // 自定义加载图标颜色 color值
-    loadingColor: {
-      type: String,
-      default: "unset",
-    },
-    // 按钮禁用状态
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    // 自定义按钮禁用样式
-    disabledClass: {
-      type: String,
-      default: "",
-    },
-
-    /**
-     * 以下为uni-app button组件属性
-     */
-    openType: {
-      type: String,
-      default: "",
-    },
-    sessionFrom: {
-      type: String,
-      default: "",
-    },
-  },
-  computed: {
-    isCustomLoadingIcon() {
-      return (this.loadingIcon && this.loadingIcon.name) || this.$slots.loading;
-    },
-    loadingIconProps() {
-      if (!this.loadingIcon) {
-        return {};
-      }
-
-      return {
-        ...defaultLoadingIconProps,
-        ...this.loadingIcon,
-      };
-    },
-    hoverClass() {
-      return this.hover ? "button-hover" : "none";
-    },
-  },
-  methods: {
-    onGetphonenumber(...params) {
-      this.$emit("getphonenumber", ...params);
-    },
-    onGetuserinfo(...params) {
-      this.$emit("getuserinfo", ...params);
-    },
-    onChooseAvatar(...params) {
-      this.$emit("chooseavatar", ...params);
-    },
-    onError(...params) {
-      this.$emit("error", ...params);
-    },
-    onClick(event) {
-      if (!this.loading) {
-        this.$emit("click", event);
-      }
-    },
-  },
+  name: 'BeButton'
 };
 </script>
 
@@ -175,6 +179,7 @@ export default {
   border-radius: unset;
   color: unset;
   background-color: unset;
+  transition: all 0.2s;
 
   &::after {
     display: none;
@@ -182,7 +187,7 @@ export default {
 }
 
 .button-hover {
-  opacity: 0.9 !important;
+  opacity: 0.8 !important;
 }
 
 .button-disabled {

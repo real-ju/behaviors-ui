@@ -1,17 +1,9 @@
 <template>
-  <view
-    class="be-video be important"
-    :class="[rootClass ? rootClass : '']"
-    :style="rootStyle"
-  >
+  <view class="be-video be deep" :class="[rootClass ? rootClass : '']" :style="rootStyle">
     <view class="cover" v-if="!play" @click="play = true">
       <slot name="cover">
         <image class="bg" :src="imgSrc" mode="aspectFill"></image>
-        <image
-          class="play-btn"
-          :src="playSrc"
-          :style="{ width: playWidth, height: playHeight }"
-        >
+        <image class="play-btn" :src="playSrc" :style="{ width: playWidth, height: playHeight }">
         </image>
       </slot>
     </view>
@@ -19,69 +11,71 @@
   </view>
 </template>
 
-<script>
-import assets_url_play from "./assets/video-play.png";
+<script setup lang="ts">
+import assetsUrlPlay from './assets/video-play.png';
+import { ref } from 'vue';
 
+const props = defineProps({
+  // 设置根元素class
+  rootClass: {
+    type: String,
+    default: ''
+  },
+  // 设置根元素style
+  rootStyle: {
+    type: String,
+    default: ''
+  },
+  imgSrc: {
+    type: String,
+    default: ''
+  },
+  videoSrc: {
+    type: String,
+    default: ''
+  },
+  playSrc: {
+    type: String,
+    default: assetsUrlPlay
+  },
+  playWidth: {
+    type: String,
+    default: '100rpx'
+  },
+  playHeight: {
+    type: String,
+    default: '100rpx'
+  },
+  hideCover: {
+    type: Boolean,
+    default: false
+  },
+  autoPlay: {
+    type: Boolean,
+    default: true
+  }
+});
+
+const emit = defineEmits(['video-play']);
+
+const play = ref(false);
+
+const init = () => {
+  if (props.hideCover) {
+    play.value = true;
+  }
+};
+
+const onVideoPlay = () => {
+  emit('video-play');
+};
+
+init();
+</script>
+
+<script lang="ts">
 export default {
-  name: "BeVideo",
-  props: {
-    // 设置根元素class
-    rootClass: {
-      type: String,
-      default: "",
-    },
-    // 设置根元素style
-    rootStyle: {
-      type: String,
-      default: "",
-    },
-    imgSrc: {
-      type: String,
-      default: "",
-    },
-    videoSrc: {
-      type: String,
-      default: "",
-    },
-    playSrc: {
-      type: String,
-      default: assets_url_play,
-    },
-    playWidth: {
-      type: String,
-      default: "100rpx",
-    },
-    playHeight: {
-      type: String,
-      default: "100rpx",
-    },
-    hideCover: {
-      type: Boolean,
-      default: false,
-    },
-    autoPlay: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data() {
-    return {
-      play: false,
-    };
-  },
-  created() {
-    this.init();
-  },
-  methods: {
-    init() {
-      if (this.hideCover) {
-        this.play = true;
-      }
-    },
-    onVideoPlay() {
-      this.$emit("video-play");
-    },
-  },
+  name: 'BeVideo'
 };
 </script>
 
