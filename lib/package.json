@@ -1,0 +1,29 @@
+{
+  "name": "behaviors-ui",
+  "version": "2.0.0",
+  "description": "behaviors-ui",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/real-ju/behaviors-ui.git"
+  },
+  "keywords": [
+    "uni-app",
+    "uniapp",
+    "ui框架",
+    "组件库",
+    "component",
+    "vue3",
+    "ts"
+  ],
+  "author": "real-ju",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/real-ju/behaviors-ui/issues"
+  },
+  "homepage": "https://github.com/real-ju/behaviors-ui#readme"
+}

@@ -1,0 +1,24 @@
+/* 全局 */
+view,
+scroll-view,
+cover-view {
+  box-sizing: border-box;
+}
+
+page {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.playground {
+  width: 100%;
+  height: 100%;
+
+  .playground-content {
+    width: 100%;
+    padding: 20rpx;
+  }
+}
