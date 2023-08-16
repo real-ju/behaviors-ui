@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import type { Recordable } from '../../types';
 
 import { ref, watch, nextTick } from 'vue';
 
@@ -354,8 +355,8 @@ const initSelectValue = () => {
     if (props.modelValue === null || (props.modelValue as Recordable[]).length === 0) {
       selectValue.value = new Array(maxLevel).fill(0);
     } else {
-      let indexes = [];
-      let datas = []; // 所选数据项(临时)
+      let indexes: number[] = [];
+      let datas: Recordable[] = []; // 所选数据项(临时)
       for (let index = 0; index < maxLevel; index++) {
         let value = (props.modelValue as Recordable[])[index];
         if (value === undefined) {

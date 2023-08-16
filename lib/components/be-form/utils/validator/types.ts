@@ -1,3 +1,5 @@
+import type { Recordable } from '../../../../types';
+
 export interface ErrorField {
   field: string;
   message: string;

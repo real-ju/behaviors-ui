@@ -2,6 +2,7 @@
 import preset from './rules';
 
 import type { ErrorField, Rules, RuleDescription, CustomValidator } from './types';
+import type { Recordable } from '../../../../types';
 
 export default {
   validate,

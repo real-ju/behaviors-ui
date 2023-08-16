@@ -30,6 +30,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import type { Recordable } from '../../types';
 
 import { ref, watch } from 'vue';
 import BeDataPopup from '../be-data-popup/index.vue';

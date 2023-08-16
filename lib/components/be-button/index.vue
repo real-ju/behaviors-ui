@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Recordable } from '../../types';
+
 import { computed, useSlots } from 'vue';
 import BeIcon from '../be-icon/index.vue';
 import { defaultLoadingIconProps } from './constant';

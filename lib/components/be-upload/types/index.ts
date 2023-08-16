@@ -1,3 +1,5 @@
+/// <reference types="@dcloudio/types" />
+
 export enum FileType {
   IMAGE = 'image',
   VIDEO = 'video'

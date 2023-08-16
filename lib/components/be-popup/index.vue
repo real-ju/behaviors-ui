@@ -21,6 +21,8 @@
 </template>
 
 <script setup lang="ts">
+import type { Recordable } from '../../types';
+
 import { ref, computed, watch } from 'vue';
 
 const props = defineProps({

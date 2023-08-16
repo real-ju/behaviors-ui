@@ -129,6 +129,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import type { Recordable } from '../../types';
 
 import { ref, computed } from 'vue';
 import BeViewLoading from '../be-view-loading/index.vue';

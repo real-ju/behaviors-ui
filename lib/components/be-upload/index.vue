@@ -26,6 +26,7 @@ import type {
   FileList,
   UploadHooks
 } from './types';
+import type { Recordable } from '../../types';
 import { FileType, UploadStatus } from './types';
 
 import { ref, computed, watch } from 'vue';
@@ -337,6 +338,10 @@ const upload = async (singleFile: UploadFile | null = null) => {
         header: props.header,
         formData: props.formData,
         success: (res) => {
+          if (res.statusCode !== 200 || !res.data) {
+            reject(res);
+            return;
+          }
           const _res = JSON.parse(res.data);
           let url = props.hooks.onResponse(_res);
           if (url) {
@@ -365,7 +370,7 @@ const upload = async (singleFile: UploadFile | null = null) => {
   });
   const uploadRes = await Promise.allSettled(tasks).then((results: any[]) => {
     const res = results.map((item) => {
-      return JSON.parse(item.value.data);
+      return item.status === 'fulfilled' ? JSON.parse(item.value.data) : item.reason;
     });
     props.hooks.onUploaded && props.hooks.onUploaded(res);
     return res;

@@ -26,8 +26,9 @@
  * 在维护时需要注意同步
  */
 import type { PropType } from 'vue';
+import type { Recordable } from '../../types';
 
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import BeSelect from '../be-select/index.vue';
 import regionJsonData from '../../assets/region/region.json';
 
@@ -310,7 +311,7 @@ const initColumnMarks = () => {
     throw 'column属性不合法';
   }
 
-  let marks = [];
+  let marks: string[] = [];
 
   for (let index = endIndex; index >= startIndex; index--) {
     marks.push(timeMarkMap[index]);
@@ -378,7 +379,7 @@ const initSelectValue = () => {
 };
 
 const getColumnDatas = (type: string, year?: number, month?: number) => {
-  let datas = [];
+  let datas: Recordable[] = [];
   let unit = timeChineseMap[type];
 
   let range = legalTimeRange[type];

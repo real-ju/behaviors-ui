@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import type { PropType } from 'vue';
+import type { Recordable } from '../../types';
 
 interface RadioOption {
   // 单选项标题

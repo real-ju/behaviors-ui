@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+import type { Recordable } from '../../types';
 import type { PropType } from 'vue';
 
 import { useSlots, onMounted } from 'vue';
