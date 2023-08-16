@@ -43,7 +43,10 @@
     "lint:prettier": "prettier --write \"src/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}\"",
     "lint:eslint": "eslint --cache --fix \"src/**/*.{js,ts,tsx,vue}\" \"types/**/*.{d.ts,ts}\"",
     "prepare": "husky install",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@dcloudio/uni-app": "3.0.0-3080720230703001",
@@ -93,6 +96,7 @@
     "unplugin-auto-import": "^0.15.1",
     "vite": "4.0.4",
     "vite-plugin-vue-setup-extend": "^0.4.0",
+    "vitepress": "^1.0.0-rc.4",
     "vue-eslint-parser": "^9.1.0",
     "vue-tsc": "^1.0.24"
   },
