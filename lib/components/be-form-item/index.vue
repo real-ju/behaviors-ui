@@ -1,10 +1,5 @@
 <template>
-  <slot
-    v-bind="{
-      error
-    }"
-  >
-  </slot>
+  <slot :error="error"></slot>
 </template>
 
 <script setup lang="ts">

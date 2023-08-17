@@ -1,13 +1,6 @@
 <template>
   <view class="be-form be deep" :class="[rootClass ? rootClass : '']" :style="rootStyle">
-    <slot
-      v-bind="{
-        validateField,
-        validate,
-        resetFields
-      }"
-    >
-    </slot>
+    <slot :validateField="validateField" :validate="validate" :resetFields="resetFields"></slot>
   </view>
 </template>
 

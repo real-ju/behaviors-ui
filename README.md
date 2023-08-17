@@ -22,12 +22,12 @@ npm install behaviors-ui
 
 ```javascript
 import { Button } from 'behaviors-ui';
-Vue.use(Button);
+app.use(Button);
 ```
 
 或者
 
 ```javascript
 import { Button } from 'behaviors-ui';
-Vue.component('be-button', Button);
+app.component('be-button', Button);
 ```

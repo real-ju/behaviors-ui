@@ -3,23 +3,19 @@
 layout: home
 
 hero:
-  name: "BehaviorsUI"
-  text: "BehaviorsUI文档"
-  tagline: My great project tagline
+  name: 'BehaviorsUI'
+  text: '高度可定制化的组件库'
+  tagline: 零基础样式
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: 开始
+      link: /introduce
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: 零样式
+    details: 组件几乎零基础样式，无需重置，方便自定义组件样式和行为
+  - title: Vue3
+    details: 仅支持uni-app Vue3+TS版本
+  - title: 开箱即用
+    details: 写一行代码即可
 ---
-

@@ -1,15 +1,13 @@
 <template>
   <slot
-    v-bind="{
-      fileList,
-      chooseImage,
-      chooseVideo,
-      previewImage,
-      remove,
-      clear,
-      upload,
-      reUpload
-    }"
+    :fileList="fileList"
+    :chooseImage="chooseImage"
+    :chooseVideo="chooseVideo"
+    :previewImage="previewImage"
+    :remove="remove"
+    :clear="clear"
+    :upload="upload"
+    :reUpload="reUpload"
   >
   </slot>
 </template>

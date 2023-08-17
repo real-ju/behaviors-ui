@@ -1,12 +1,5 @@
 <template>
-  <slot
-    v-bind="{
-      data,
-      isChecked,
-      selectItem
-    }"
-  >
-  </slot>
+  <slot :data="data" :isChecked="isChecked" :selectItem="selectItem"></slot>
 </template>
 
 <script setup lang="ts">

@@ -1,10 +1,5 @@
 <template>
-  <slot
-    v-bind="{
-      percent
-    }"
-  >
-  </slot>
+  <slot :percent="percent"></slot>
 </template>
 
 <script setup lang="ts">
