@@ -11,7 +11,7 @@
     :hover-class="btnHoverClass"
     :loading="!isCustomLoadingIcon && loading"
     :disabled="disabled"
-    :data-loading="loading"
+    :data-loading="loading || undefined"
     :open-type="openType"
     :session-from="sessionFrom"
     @getphonenumber="onGetphonenumber"

@@ -1,9 +1,9 @@
 {
   "pages": [
     // pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-    // 登录
+    // 按钮
     {
-      "path": "pages/login/index",
+      "path": "pages/button/basic",
       "style": {
         "navigationStyle": "custom"
       }

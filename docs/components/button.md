@@ -2,9 +2,33 @@
 
 ## 基本使用
 
-```vue
-<be-button>按钮</be-button>
+::: code-group
+
+```vue [template]
+<be-button class="button-1" hover>按钮</be-button>
 ```
+
+```scss [style scoped]
+.button-1 {
+  width: 80px;
+  height: 30px;
+  border-radius: 8px;
+  background-color: #4a68cc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: #ffffff;
+}
+```
+
+:::
+
+<ExampleIframe url="/pages/button/basic" height="80px"></ExampleIframe>
+
+<script setup lang="ts">
+import ExampleIframe from "../src/ExampleIframe.vue";
+</script>
 
 ## API
 
