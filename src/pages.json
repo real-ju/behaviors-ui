@@ -7,6 +7,27 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 不同状态按钮
+    {
+      "path": "pages/button/statusSwitch",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 图标
+    {
+      "path": "pages/icon/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 视图加载中
+    {
+      "path": "pages/viewLoading/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

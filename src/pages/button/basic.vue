@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="playground button-page">
+  <scroll-view class="playground button-basic-page">
     <view class="playground-content">
       <be-button class="button-1" hover>按钮</be-button>
     </view>
@@ -9,7 +9,7 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.button-page {
+.button-basic-page {
   .button-1 {
     width: 80px;
     height: 30px;

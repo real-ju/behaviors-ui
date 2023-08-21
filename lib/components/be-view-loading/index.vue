@@ -9,22 +9,24 @@
     }"
   >
     <slot>
-      <image
-        v-if="!iconName"
-        class="icon"
-        :style="{ width: iconSize, height: iconSize }"
-        :src="assetsUrlLoading"
-      />
       <BeIcon
-        v-else
+        v-if="loadingIcon && loadingIcon.name"
         class="icon"
-        :name="iconName"
+        :fontFamily="loadingIconProps.fontFamily"
+        :prefix="loadingIconProps.prefix"
+        :name="loadingIconProps.name"
         :style="{
           'font-size': iconSize,
           color: iconColor
         }"
       >
       </BeIcon>
+      <image
+        v-else
+        class="icon"
+        :style="{ width: iconSize, height: iconSize }"
+        :src="assetsUrlLoading"
+      />
     </slot>
   </view>
 </template>
@@ -33,6 +35,7 @@
 import { computed, useSlots } from 'vue';
 import BeIcon from '../be-icon/index.vue';
 import assetsUrlLoading from './assets/loading.png';
+import { defaultLoadingIconProps } from './constant';
 
 const props = defineProps({
   // 加载图标大小
@@ -40,10 +43,12 @@ const props = defineProps({
     type: String,
     default: '50rpx'
   },
-  // 自定义加载图标 Icon组件 name值
-  iconName: {
-    type: String,
-    default: ''
+  // 自定义加载图标 Icon组件 props
+  loadingIcon: {
+    type: Object,
+    default: () => {
+      return { ...defaultLoadingIconProps };
+    }
   },
   // 自定义加载图标颜色 color值
   iconColor: {
@@ -71,6 +76,17 @@ const slots = useSlots();
 
 const displayStyle = computed(() => {
   return slots.default ? 'block' : 'flex';
+});
+
+const loadingIconProps = computed<Recordable>(() => {
+  if (!props.loadingIcon) {
+    return {};
+  }
+
+  return {
+    ...defaultLoadingIconProps,
+    ...props.loadingIcon
+  };
 });
 </script>
 

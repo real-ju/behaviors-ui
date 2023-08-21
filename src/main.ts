@@ -1,4 +1,5 @@
 import '@/design/index.scss';
+import '@/static/icon/iconfont.css';
 
 import { createSSRApp } from 'vue';
 import * as Pinia from 'pinia';

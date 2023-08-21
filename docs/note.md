@@ -12,7 +12,7 @@
 
 在微信小程序中，组件编译后会在根节点外套一层标签（类似于 CustomElement），直接在组件上写 class 和 style 不会透传到根节点。可以使用`root-class`和`root-style`：
 
-```vue
+```html
 <be-button root-class="my-button" root-style="color: red">按钮</be-button>
 ```
 

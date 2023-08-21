@@ -24,6 +24,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     plugins: createVitePlugins(viteEnv),
     server: {
       host: true,
+      port: 6600,
       // host: '0.0.0.0',
       proxy: {
         '/api': {
