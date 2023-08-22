@@ -25,7 +25,11 @@ export default defineConfig({
         items: [
           { text: 'Icon 图标', link: '/components/icon' },
           { text: 'Button 按钮', link: '/components/button' },
-          { text: 'ViewLoading 视图加载中', link: '/components/view-loading' }
+          { text: 'ViewLoading 视图加载中', link: '/components/view-loading' },
+          { text: 'AppPage 页面', link: '/components/app-page' },
+          { text: 'Radio 单选器', link: '/components/radio' },
+          { text: 'Checkbox 多选器', link: '/components/checkbox' },
+          { text: 'Popup 弹出层', link: '/components/popup' }
         ]
       }
     ],

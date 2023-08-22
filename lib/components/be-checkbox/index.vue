@@ -1,5 +1,5 @@
 <template>
-  <slot :data="data" :isChecked="isChecked" :selectItem="selectItem"></slot>
+  <slot :options="options" :isChecked="isChecked" :selectItem="selectItem"></slot>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +27,7 @@ const props = defineProps({
     }
   },
   // 选项数据
-  data: {
+  options: {
     type: Array as PropType<Array<CheckboxOption>>,
     default: () => {
       return [];

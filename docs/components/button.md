@@ -145,6 +145,7 @@ const switchStatus = () => {
 | 插槽名  | 说明           | 默认值 |
 | ------- | -------------- | ------ |
 | loading | 自定义加载样式 | 有     |
+| default | 按钮内容       | 无     |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

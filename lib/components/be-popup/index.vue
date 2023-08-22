@@ -38,10 +38,12 @@ const props = defineProps({
     type: String,
     default: 'center' // 可选 top / right / bottom / left / custom
   },
+  // position=left|right有效
   width: {
     type: String,
     default: 'unset'
   },
+  // position=top|bottom有效
   height: {
     type: String,
     default: 'unset'
@@ -49,7 +51,7 @@ const props = defineProps({
   // position=center无效
   backgroundColor: {
     type: String,
-    default: 'white'
+    default: '#ffffff'
   },
   // position=center无效
   borderRadius: {

@@ -23,6 +23,10 @@
 
 <ExampleIframe url="/pages/viewLoading/basic" height="135px"></ExampleIframe>
 
+::: warning
+由于 ViewLoading 组件使用了`position: absolute`定位，所以需要把容器设置为定位祖先元素，比如给容器设置`position: relative`。
+:::
+
 ## API
 
 ### Props
@@ -35,6 +39,12 @@
 | bgColor      | 背景颜色           | css background-color           | rgba(255, 255, 255, 0)                                    |
 | borderRadius | 边框圆角           | css border-radius              | 0rpx                                                      |
 | height       | 高度               | css height                     | 100%                                                      |
+
+### Slots
+
+| 插槽名  | 说明           | 默认值 |
+| ------- | -------------- | ------ |
+| default | 自定义加载样式 | 有     |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

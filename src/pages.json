@@ -28,6 +28,55 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 页面
+    {
+      "path": "pages/appPage/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 沉浸式导航栏页面
+    {
+      "path": "pages/appPage/immersiveNav",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 下拉刷新页面
+    {
+      "path": "pages/appPage/refresh",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 多选器
+    {
+      "path": "pages/checkbox/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 单选器
+    {
+      "path": "pages/radio/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 弹出层
+    {
+      "path": "pages/popup/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 自定义位置弹出层
+    {
+      "path": "pages/popup/custom",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

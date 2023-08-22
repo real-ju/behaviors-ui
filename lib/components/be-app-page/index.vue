@@ -17,6 +17,7 @@
     <view class="page-main">
       <scroll-view
         v-if="!loading"
+        :style="{ backgroundColor: bgColor, '--refresher-color': refresherColor }"
         scroll-y
         @scroll="pageScroll"
         :scroll-with-animation="scrollWithAnimation"
@@ -24,8 +25,8 @@
         @scrolltolower="scrollToLower"
         :refresher-enabled="pullDownRefresh"
         :refresher-triggered="triggered"
+        refresher-background="rgba(255, 255, 255, 0)"
         @refresherrefresh="refreshData"
-        :style="{ backgroundColor: bgColor }"
       >
         <slot></slot>
       </scroll-view>
@@ -82,6 +83,11 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  // 下拉刷新器颜色
+  refresherColor: {
+    type: String,
+    default: '#aaaaaa'
+  },
   // 页面滚动动画
   scrollWithAnimation: {
     type: Boolean,
@@ -89,7 +95,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['refreshData', 'scrolltolower', 'scroll', 'toggleNavBg']);
+const emit = defineEmits(['refreshData', 'scrolltolower', 'scroll', 'toggleImmersive']);
 
 const statusBarHeight = ref(0);
 const navWhiteBg = ref(false);
@@ -126,20 +132,20 @@ const setPageScroll = (value: number) => {
 const pageScroll = (event: any) => {
   emit('scroll', event);
 
-  if (props.immersiveNav) {
+  if (!props.immersiveNav) {
     return;
   }
 
   let detail = event.detail;
 
   if (detail.scrollTop > 100) {
-    if (navWhiteBg.value) {
-      emit('toggleNavBg', true);
+    if (!navWhiteBg.value) {
+      emit('toggleImmersive', false);
     }
     navWhiteBg.value = true;
   } else {
     if (navWhiteBg.value) {
-      emit('toggleNavBg', false);
+      emit('toggleImmersive', true);
     }
     navWhiteBg.value = false;
   }
@@ -213,6 +219,26 @@ export default {
     scroll-view {
       width: 100%;
       height: 100%;
+    }
+
+    // H5中定义下拉刷新器颜色
+    :deep {
+      .uni-scroll-view-refresher {
+        .uni-scroll-view-refresh-inner {
+          background-color: unset;
+          box-shadow: none;
+
+          .uni-scroll-view-refresh__spinner {
+            circle {
+              color: var(--refresher-color) !important;
+            }
+          }
+        }
+
+        .uni-scroll-view-refresh__icon {
+          fill: var(--refresher-color);
+        }
+      }
     }
   }
 }

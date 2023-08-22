@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="playground icon-view-loading-page">
+  <scroll-view class="playground view-loading-basic-page">
     <view class="playground-content">
       <view class="container">
         <be-view-loading iconSize="26px"></be-view-loading>
@@ -11,7 +11,7 @@
 <script setup lang="ts"></script>
 
 <style lang="scss" scoped>
-.icon-view-loading-page {
+.view-loading-basic-page {
   .container {
     width: 100%;
     height: 100px;
