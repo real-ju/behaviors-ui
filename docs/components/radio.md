@@ -71,7 +71,7 @@ const options = ref([
 
 | 属性名              | 说明               | 类型                                                                                       | 默认值 |
 | ------------------- | ------------------ | ------------------------------------------------------------------------------------------ | ------ |
-| modelValue(v-model) | 当前选中项的 value | string \|number                                                                            | null   |
+| modelValue(v-model) | 当前选中项的 value | string \| number                                                                           | null   |
 | options             | 选项数据           | `Array<{ title: string, value: string \| number, disabled?: boolean, desc?: Recordable }>` | `[]`   |
 
 ### Slots

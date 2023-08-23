@@ -77,6 +77,20 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 数据操作器
+    {
+      "path": "pages/dataPopup/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 数据操作器-列表数据筛选
+    {
+      "path": "pages/dataPopup/filter",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

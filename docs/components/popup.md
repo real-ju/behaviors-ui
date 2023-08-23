@@ -81,16 +81,41 @@ const visible = ref(false);
 <ExampleIframe url="/pages/popup/custom" height="200px"></ExampleIframe>
 
 ::: warning
-`position=custom`时，弹出层内容根节点必须添加.stop 阻止冒泡，否则点击内容会引起弹出层关闭。
+限制：当`position=custom`时，弹出层内容根节点必须添加 @click.stop 阻止冒泡，否则点击事件会引起弹出层关闭。
 :::
 
 ## API
 
 ### Props
 
-| 属性名     | 说明                                | 类型   | 默认值   |
-| ---------- | ----------------------------------- | ------ | -------- |
-| fontFamily | 阿里巴巴图标库项目配置的 FontFamily | string | iconfont |
+| 属性名             | 说明                                            | 类型                                               | 默认值  |
+| ------------------ | ----------------------------------------------- | -------------------------------------------------- | ------- |
+| visible(v-model)   | 是否打开弹出层                                  | boolean                                            | false   |
+| position           | 弹出层位置                                      | center \| top \| right \| bottom \| left \| custom | center  |
+| width              | 弹出层宽度，仅当`position=left\|right`时生效    | css width                                          | -       |
+| height             | 弹出层高度，仅当`position=top\|bottom`时生效    | css height                                         | -       |
+| backgroundColor    | 弹出层背景色，当`position=center\|custom`时无效 | css background-color                               | #ffffff |
+| borderRadius       | 弹出层圆角，当`position=center\|custom`时无效   | css border-radius                                  | 16rpx   |
+| maskOpacity        | 弹出层遮罩透明度                                | css opacity                                        | 0.6     |
+| maskCloseAble      | 点击遮罩是否关闭弹出层                          | boolean                                            | true    |
+| negativeTop        | 居中时往上偏移量，仅当`position=center`时生效   | css top                                            | 5%      |
+| animation          | 是否开启动画                                    | boolean                                            | true    |
+| animationDuration  | 打开关闭弹框的动画时长(ms)                      | number                                             | 150     |
+| screenTopOffset    | 弹出层距离屏幕顶部的偏移量                      | css top                                            | 0px     |
+| screenBottomOffset | 弹出层距离屏幕底部的偏移量                      | css bottom                                         | 0px     |
+
+### Events
+
+| 事件名称  | 说明                            | 回调参数 |
+| --------- | ------------------------------- | -------- |
+| close     | 弹出层关闭                      | -        |
+| maskClick | 当`position=custom`时，点击遮罩 | -        |
+
+### Slots
+
+| 插槽名  | 说明       | 默认值 |
+| ------- | ---------- | ------ |
+| default | 弹出层内容 | 无     |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";
