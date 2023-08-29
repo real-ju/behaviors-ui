@@ -24,7 +24,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const model = ref(null);
+const model = ref<number>();
 const options = ref([
   { title: '选项1', value: 1 },
   { title: '选项2', value: 2 },

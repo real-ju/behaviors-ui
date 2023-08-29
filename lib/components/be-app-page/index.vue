@@ -11,7 +11,7 @@
     >
       <view class="status-bar-area" :style="{ height: statusBarHeight + 'px' }"> </view>
       <view class="action-bar-area">
-        <slot name="actionBar" :title="title"></slot>
+        <slot name="navBar" :title="title"></slot>
       </view>
     </view>
     <view class="page-main">

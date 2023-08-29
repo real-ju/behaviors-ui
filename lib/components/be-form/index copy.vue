@@ -1,5 +1,7 @@
 <template>
-  <slot :validateField="validateField" :validate="validate" :resetFields="resetFields"></slot>
+  <view class="be-form be deep" :class="[rootClass ? rootClass : '']" :style="rootStyle">
+    <slot :validateField="validateField" :validate="validate" :resetFields="resetFields"></slot>
+  </view>
 </template>
 
 <script setup lang="ts">
@@ -15,6 +17,16 @@ interface ErrorField {
 }
 
 const props = defineProps({
+  // 设置根元素class
+  rootClass: {
+    type: String,
+    default: ''
+  },
+  // 设置根元素style
+  rootStyle: {
+    type: String,
+    default: ''
+  },
   // 表单数据对象
   model: {
     type: Object as PropType<Recordable>,

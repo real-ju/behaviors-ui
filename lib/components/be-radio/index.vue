@@ -21,7 +21,7 @@ const props = defineProps({
   // 当前选中项value
   modelValue: {
     type: [Number, String],
-    default: null
+    default: undefined
   },
   // 选项数据
   options: {

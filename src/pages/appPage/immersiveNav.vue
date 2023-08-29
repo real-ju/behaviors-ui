@@ -6,8 +6,8 @@
     immersiveNav
     @toggleImmersive="toggleImmersive"
   >
-    <template #actionBar="{ title }">
-      <ActionBar :title="title" :bgTheme="bgTheme"></ActionBar>
+    <template #navBar="{ title }">
+      <NavBar :title="title" :bgTheme="bgTheme"></NavBar>
     </template>
     <view class="banner">Banner</view>
     <view>文本</view>
@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import ActionBar from './ActionBar.vue';
+import NavBar from './NavBar.vue';
 
 import { ref } from 'vue';
 

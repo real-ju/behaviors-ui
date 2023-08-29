@@ -3,7 +3,7 @@
     class="example-iframe"
     title="Inline Frame Example"
     :src="'../example/index.html#' + url"
-    :style="{ height }"
+    :style="{ height, maxWidth }"
   >
   </iframe>
 </template>
@@ -15,6 +15,10 @@ const props = defineProps({
     default: ''
   },
   height: {
+    type: String,
+    default: 'unset'
+  },
+  maxWidth: {
     type: String,
     default: 'unset'
   }

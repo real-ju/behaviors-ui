@@ -25,7 +25,7 @@
 ```ts [script]
 import { ref } from 'vue';
 
-const model = ref(null);
+const model = ref<number>();
 const options = ref([
   { title: '选项1', value: 1 },
   { title: '选项2', value: 2 },
@@ -69,10 +69,10 @@ const options = ref([
 
 ### Props
 
-| 属性名              | 说明               | 类型                                                                                       | 默认值 |
-| ------------------- | ------------------ | ------------------------------------------------------------------------------------------ | ------ |
-| modelValue(v-model) | 当前选中项的 value | string \| number                                                                           | null   |
-| options             | 选项数据           | `Array<{ title: string, value: string \| number, disabled?: boolean, desc?: Recordable }>` | `[]`   |
+| 属性名              | 说明               | 类型                                                                                       | 默认值    |
+| ------------------- | ------------------ | ------------------------------------------------------------------------------------------ | --------- |
+| modelValue(v-model) | 当前选中项的 value | string \| number                                                                           | undefined |
+| options             | 选项数据           | `Array<{ title: string, value: string \| number, disabled?: boolean, desc?: Recordable }>` | `[]`      |
 
 ### Slots
 

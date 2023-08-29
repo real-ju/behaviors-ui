@@ -64,7 +64,7 @@ const props = defineProps({
   // 主题色
   theme: {
     type: String,
-    default: '#2979ff'
+    default: '#4a68cc'
   }
 });
 
@@ -133,6 +133,7 @@ export default {
     position: absolute;
     top: 32rpx;
     right: 30rpx;
+    cursor: pointer;
   }
 
   .data-content {

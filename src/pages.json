@@ -91,6 +91,13 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 表单-登录
+    {
+      "path": "pages/form/login",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

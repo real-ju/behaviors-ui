@@ -29,7 +29,9 @@ export default defineConfig({
           { text: 'AppPage 页面', link: '/components/app-page' },
           { text: 'Radio 单选器', link: '/components/radio' },
           { text: 'Checkbox 多选器', link: '/components/checkbox' },
-          { text: 'Popup 弹出层', link: '/components/popup' }
+          { text: 'Popup 弹出层', link: '/components/popup' },
+          { text: 'DataPopup 数据操作器', link: '/components/data-popup' },
+          { text: 'Form 表单', link: '/components/form' }
         ]
       }
     ],

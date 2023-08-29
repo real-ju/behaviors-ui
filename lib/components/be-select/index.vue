@@ -97,7 +97,7 @@ const props = defineProps({
   },
   theme: {
     type: String,
-    default: '#2979ff'
+    default: '#4a68cc'
   }
 });
 

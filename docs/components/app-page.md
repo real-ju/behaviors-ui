@@ -8,8 +8,8 @@
 
 ```html [template]
 <be-app-page showNavbar title="标题" bgColor="#f2f2f2">
-  <template #actionBar="{ title }">
-    <ActionBar :title="title"></ActionBar>
+  <template #navBar="{ title }">
+    <NavBar :title="title"></NavBar>
   </template>
   <view>内容</view>
 </be-app-page>
@@ -20,7 +20,7 @@
 <ExampleIframe url="/pages/appPage/basic" height="300px"></ExampleIframe>
 
 ::: info
-顶部导航栏一般根据产品设计，有不同的样式和功能。所以导航栏组件请自行封装，通过`actionBar`slot 传入即可。这里不提供 ActionBar 组件代码，只用于演示。
+顶部导航栏一般根据产品设计，有不同的样式和功能。所以导航栏组件请自行封装，通过`navBar`slot 传入即可。这里不提供 NavBar 组件代码，只用于演示。
 :::
 
 ## 沉浸式导航栏
@@ -35,8 +35,8 @@
   immersiveNav
   @toggleImmersive="toggleImmersive"
 >
-  <template #actionBar="{ title }">
-    <ActionBar :title="title" :bgTheme="bgTheme"></ActionBar>
+  <template #navBar="{ title }">
+    <NavBar :title="title" :bgTheme="bgTheme"></NavBar>
   </template>
   <view class="banner">Banner</view>
   <view>文本</view>
@@ -67,8 +67,8 @@ const toggleImmersive = (isImmersive: boolean) => {
 
 ```html [template]
 <be-app-page showNavbar title="标题" bgColor="#f2f2f2" pullDownRefresh @refreshData="refreshData">
-  <template #actionBar="{ title }">
-    <ActionBar :title="title"></ActionBar>
+  <template #navBar="{ title }">
+    <NavBar :title="title"></NavBar>
   </template>
   <view>文本文本文本文本文本文本文本文本文本文本</view>
 </be-app-page>
@@ -119,12 +119,12 @@ const refreshData = (finishRefresh: Function) => {
 
 ### Slots
 
-| 插槽名    | 说明                                                                                                                                                             | slot props          | 默认值 |
-| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------ |
-| actionBar | 自定义导航栏                                                                                                                                                     | `{ title: string }` | 无     |
-| loading   | 自定义加载视图，推荐传入 [BeViewLoading](/components/view-loading) 组件                                                                                          | -                   | 有     |
-| upLayer   | 顶层视图。由于在微信小程序中，`position: fixed`定位的基准元素是最近的`<scroll-view>`而不是视口。如果需要跳出这个限制，比如全局弹出层，请把视图代码放在该插槽中。 | -                   | 无     |
-| default   | 页面内容                                                                                                                                                         | -                   | 无     |
+| 插槽名  | 说明                                                                                                                                                             | slot props          | 默认值 |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------ |
+| navBar  | 自定义导航栏                                                                                                                                                     | `{ title: string }` | 无     |
+| loading | 自定义加载视图，推荐传入 [BeViewLoading](/components/view-loading) 组件                                                                                          | -                   | 有     |
+| upLayer | 顶层视图。由于在微信小程序中，`position: fixed`定位的基准元素是最近的`<scroll-view>`而不是视口。如果需要跳出这个限制，比如全局弹出层，请把视图代码放在该插槽中。 | -                   | 无     |
+| default | 页面内容                                                                                                                                                         | -                   | 无     |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";
