@@ -31,7 +31,7 @@ const props = defineProps({
     default: ''
   },
   modelValue: {
-    type: String,
+    type: [String, Number],
     default: ''
   },
   type: {
@@ -84,9 +84,9 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:modelValue', 'focus']);
+const emit = defineEmits(['update:modelValue', 'focus', 'blur']);
 
-const oldValue = ref(props.modelValue);
+const oldValue = ref(String(props.modelValue || ''));
 
 const inputType = computed(() => {
   if (props.type === 'text') {
@@ -121,34 +121,39 @@ const inputPattern = computed(() => {
 });
 
 const changeValue = (inputValue: string, newValue: string) => {
-  // 输入框中的值和v-model的值一样则无需更新视图
+  const updateValue =
+    props.type === 'number' ? (newValue ? parseFloat(newValue) : undefined) : newValue;
   if (newValue === inputValue) {
-    emit('update:modelValue', newValue);
+    // 输入框中的值和v-model的值一样则无需更新视图
+    emit('update:modelValue', updateValue);
     oldValue.value = newValue;
   } else {
     emit('update:modelValue', inputValue);
     nextTick(() => {
-      emit('update:modelValue', newValue);
+      emit('update:modelValue', updateValue);
       oldValue.value = newValue;
     });
   }
 };
 
 const onInput = (event: any) => {
-  let inputValue, newValue;
+  let inputValue; // 每次input事件输入框的值
+  let newValue; // 处理后的正确的值
   newValue = inputValue = event.detail.value;
 
   if (props.trim) {
     newValue = newValue.trim();
   }
 
-  if (inputPattern.value) {
-    if (inputPattern.value.test(newValue)) {
-      newValue = oldValue.value;
-    }
+  if (inputPattern.value && !inputPattern.value.test(newValue)) {
+    newValue = oldValue.value;
   }
 
   changeValue(inputValue, newValue);
+};
+
+const onFocus = (event: any) => {
+  emit('focus', event);
 };
 
 const onBlur = (event: any) => {
@@ -161,9 +166,7 @@ const onBlur = (event: any) => {
       emit('update:modelValue', String(props.max));
     }
   }
-};
-const onFocus = (event: any) => {
-  emit('focus', event);
+  emit('blur', event);
 };
 </script>
 

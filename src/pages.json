@@ -98,6 +98,34 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 手势视图
+    {
+      "path": "pages/gestureView/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 图片
+    {
+      "path": "pages/image/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 输入框
+    {
+      "path": "pages/input/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 数字输入框
+    {
+      "path": "pages/input/number",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

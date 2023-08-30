@@ -31,7 +31,10 @@ export default defineConfig({
           { text: 'Checkbox 多选器', link: '/components/checkbox' },
           { text: 'Popup 弹出层', link: '/components/popup' },
           { text: 'DataPopup 数据操作器', link: '/components/data-popup' },
-          { text: 'Form 表单', link: '/components/form' }
+          { text: 'Form 表单', link: '/components/form' },
+          { text: 'GestureView 手势视图', link: '/components/gesture-view' },
+          { text: 'Image 图片', link: '/components/image' },
+          { text: 'Input 输入框', link: '/components/input' }
         ]
       }
     ],

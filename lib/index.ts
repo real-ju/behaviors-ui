@@ -6,7 +6,7 @@ import Checkbox from './components/be-checkbox/index.vue';
 import DataPopup from './components/be-data-popup/index.vue';
 import Form from './components/be-form/index.vue';
 import FormItem from './components/be-form-item/index.vue';
-import Gesture from './components/be-gesture/index.vue';
+import GestureView from './components/be-gesture-view/index.vue';
 import Icon from './components/be-icon/index.vue';
 import Image from './components/be-image/index.vue';
 import Input from './components/be-input/index.vue';
@@ -30,7 +30,7 @@ const components: any[] = [
   DataPopup,
   Form,
   FormItem,
-  Gesture,
+  GestureView,
   Icon,
   Image,
   Input,
@@ -74,7 +74,7 @@ export {
   DataPopup,
   Form,
   FormItem,
-  Gesture,
+  GestureView,
   Icon,
   Image,
   Input,

@@ -8,7 +8,7 @@
 
 ```ts [main.ts]
 // 全局引入从iconfont.cn下载的CSS
-import '/static/foo/iconfont.css';
+import '/static/xxx/iconfont.css';
 ```
 
 ```html [template]

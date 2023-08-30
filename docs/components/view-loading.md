@@ -42,9 +42,9 @@
 
 ### Slots
 
-| 插槽名  | 说明           | 默认值 |
-| ------- | -------------- | ------ |
-| default | 自定义加载样式 | 有     |
+| 插槽名  | 说明           | slot props | 默认值 |
+| ------- | -------------- | ---------- | ------ |
+| default | 自定义加载样式 | -          | 有     |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

@@ -126,6 +126,13 @@ const refreshData = (finishRefresh: Function) => {
 | upLayer | 顶层视图。由于在微信小程序中，`position: fixed`定位的基准元素是最近的`<scroll-view>`而不是视口。如果需要跳出这个限制，比如全局弹出层，请把视图代码放在该插槽中。 | -                   | 无     |
 | default | 页面内容                                                                                                                                                         | -                   | 无     |
 
+### Methods
+
+| 方法名        | 说明         | 参数         |
+| ------------- | ------------ | ------------ |
+| finishRefresh | 结束下拉刷新 | `() => void` |
+| backTop       | 返回页面顶部 | `() => void` |
+
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";
 </script>

@@ -8,7 +8,7 @@
     ]"
     :style="rootStyle"
   >
-    <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad"> </image>
+    <image class="image" :src="src" :mode="mode" lazy-load @load="onImgLoad"></image>
     <template v-if="!ready">
       <view class="mask" v-if="!customLoading">
         <image class="icon" :src="assetsUrlLoading" />
