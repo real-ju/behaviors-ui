@@ -126,7 +126,7 @@ const props = defineProps({
 const emit = defineEmits(['update:visible', 'update:value']);
 
 const selectValue = ref<any[]>([]);
-const selectList = ref<Recordable[]>([]);
+const selectList = ref<any[]>([]);
 const selectRef = ref();
 let columnMarks: string[] = [];
 let currentDate: Recordable = {};

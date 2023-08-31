@@ -40,7 +40,7 @@ const props = defineProps({
     default: 'single' // 可选 cascade 级联选择 multiple 多项选择
   },
   list: {
-    type: Array as PropType<Recordable[]>,
+    type: Array as PropType<any[]>,
     default: () => {
       return [];
     }
@@ -300,6 +300,8 @@ const init = () => {
     initSelectValue();
     initPickerDatas();
   }
+  // 初始化v-model值
+  updateModelValue();
 };
 
 const initPickerDatas = () => {
@@ -341,7 +343,7 @@ const initSelectValue = () => {
   } else if (props.mode === 'multiple') {
     let indexes = pickerDatas.value.map((item, index) => {
       let rstIndex = item.findIndex((data: Recordable) => {
-        return data.value === (props.modelValue as Recordable[])[index];
+        return data.value === (props.modelValue as any[])[index];
       });
       if (rstIndex === -1) {
         rstIndex = 0;
@@ -352,13 +354,13 @@ const initSelectValue = () => {
 
     selectValue.value = indexes;
   } else if (props.mode === 'cascade') {
-    if (props.modelValue === null || (props.modelValue as Recordable[]).length === 0) {
+    if (props.modelValue === null || (props.modelValue as any[]).length === 0) {
       selectValue.value = new Array(maxLevel).fill(0);
     } else {
       let indexes: number[] = [];
       let datas: Recordable[] = []; // 所选数据项(临时)
       for (let index = 0; index < maxLevel; index++) {
-        let value = (props.modelValue as Recordable[])[index];
+        let value = (props.modelValue as any[])[index];
         if (value === undefined) {
           break;
         } else {
@@ -387,7 +389,6 @@ const initSelectValue = () => {
       selectValue.value = indexes;
     }
   }
-  updateModelValue();
 };
 
 init();

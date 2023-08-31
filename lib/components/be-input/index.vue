@@ -86,7 +86,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'focus', 'blur']);
 
-const oldValue = ref(String(props.modelValue || ''));
+const oldValue = ref<string>(String(props.modelValue || ''));
 
 const inputType = computed(() => {
   if (props.type === 'text') {
@@ -121,10 +121,15 @@ const inputPattern = computed(() => {
 });
 
 const changeValue = (inputValue: string, newValue: string) => {
+  // type=number时转换为Number类型
   const updateValue =
-    props.type === 'number' ? (newValue ? parseFloat(newValue) : undefined) : newValue;
+    props.type === 'number'
+      ? newValue && newValue !== '-'
+        ? parseFloat(newValue)
+        : undefined
+      : newValue;
+  // 输入框中的值和v-model的值一样则无需更新视图（处理uni-app input组件问题）
   if (newValue === inputValue) {
-    // 输入框中的值和v-model的值一样则无需更新视图
     emit('update:modelValue', updateValue);
     oldValue.value = newValue;
   } else {

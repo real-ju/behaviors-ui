@@ -71,7 +71,7 @@ const props = defineProps({
     default: 'single' // 可选 cascade 级联选择 multiple 多项选择
   },
   list: {
-    type: Array as PropType<Recordable[]>,
+    type: Array as PropType<any[]>,
     default: () => {
       return [];
     }

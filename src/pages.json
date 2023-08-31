@@ -126,6 +126,41 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 内嵌选择器-单选
+    {
+      "path": "pages/selectView/single",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 内嵌选择器-多选
+    {
+      "path": "pages/selectView/multiple",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 内嵌选择器-级联选择
+    {
+      "path": "pages/selectView/cascade",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 内嵌选择器-时间选择
+    {
+      "path": "pages/pickerView/time",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 内嵌选择器-地区选择
+    {
+      "path": "pages/pickerView/region",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

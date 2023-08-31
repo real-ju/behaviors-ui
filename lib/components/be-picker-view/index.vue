@@ -91,7 +91,7 @@ const props = defineProps({
     }
   },
   // 地区模式 指定默认省范围 如'北京市' 为空则表示不限制范围
-  regionRange: {
+  province: {
     type: String,
     default: null
   },
@@ -134,7 +134,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue']);
 
 const selectValue = ref<any[]>([]);
-const selectList = ref<Recordable[]>([]);
+const selectList = ref<any[]>([]);
 const selectView = ref();
 let columnMarks: string[] = [];
 let currentDate: Recordable = {};
@@ -186,7 +186,7 @@ watch(
     () => props.timeFormat,
     () => props.timeColumn,
     () => props.timeRange,
-    () => props.regionRange,
+    () => props.province,
     () => props.regionValueType
   ],
   () => {
@@ -442,10 +442,10 @@ const initSelectList = () => {
     selectList.value = list;
   } else if (props.mode === 'region') {
     let list;
-    let regionRange = props.regionRange;
-    if (regionRange) {
+    let province = props.province;
+    if (province) {
       list = regionJsonData.filter((item) => {
-        return item.name === regionRange;
+        return item.name === province;
       });
     } else {
       list = regionJsonData;
