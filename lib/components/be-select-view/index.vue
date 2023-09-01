@@ -33,7 +33,7 @@ let flatItemId = 1;
 const props = defineProps({
   modelValue: {
     type: [Number, String, Array],
-    default: null
+    default: undefined
   },
   mode: {
     type: String,
@@ -135,7 +135,7 @@ const getColumnOrderStyle = (index: number) => {
 // 重置v-model为默认值
 const clear = () => {
   if (props.mode === 'single') {
-    emit('update:modelValue', null);
+    emit('update:modelValue', undefined);
   } else if (props.mode === 'multiple' || props.mode === 'cascade') {
     emit('update:modelValue', []);
   }
@@ -354,7 +354,7 @@ const initSelectValue = () => {
 
     selectValue.value = indexes;
   } else if (props.mode === 'cascade') {
-    if (props.modelValue === null || (props.modelValue as any[]).length === 0) {
+    if (props.modelValue === undefined || (props.modelValue as any[]).length === 0) {
       selectValue.value = new Array(maxLevel).fill(0);
     } else {
       let indexes: number[] = [];

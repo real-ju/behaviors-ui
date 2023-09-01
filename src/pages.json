@@ -161,6 +161,13 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 选择器
+    {
+      "path": "pages/select/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

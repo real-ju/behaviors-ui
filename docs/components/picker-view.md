@@ -42,7 +42,7 @@ const region = ref([]);
 
 :::
 
-<ExampleIframe url="/pages/selectView/multiple" height="300px"></ExampleIframe>
+<ExampleIframe url="/pages/pickerView/region" height="300px"></ExampleIframe>
 
 ## API
 
@@ -55,9 +55,15 @@ const region = ref([]);
 | timeFormat          | 时间格式（v-model 值的格式），当`mode=time`时生效。占位符：年`yyyy` 月`MM` 日`dd` 时`hh` 分`mm` 秒`ss`                                                             | string                 | yyyy-MM-dd        |
 | timeColumn          | 时间可选度量区间。一个数组，第一项表示最大度量单位，二个项表示最小度量单位，当`mode=time`时生效。单位值：年`year` 月`month` 日`day` 时`hour` 分`minute` 秒`second` | `string[]`             | `['year', 'day']` |
 | timeRange           | 时间可选范围。一个对象，例如`{ year: [1990, 2030], hour: [12, 23] }`表示年份范围 1990 ~ 2030，小时范围 12 点 ~ 23 点，字段名同上面单位值                           | object                 | -                 |
+| province            | 指定省份，例如`北京市`，当`mode=region`时生效                                                                                                                      | string                 | -                 |
+| regionValueType     | 地区值类型，默认中文名，可选地区编码                                                                                                                               | name \| code           | name              |
 | width               | 宽度                                                                                                                                                               | css width              | 100%              |
 | height              | 高度                                                                                                                                                               | css height             | 400rpx            |
 | layout              | 列布局方式。可选值`row-reverse`，水平从右到左排列                                                                                                                  | default \| row-reverse | default           |
+
+::: info
+`v-model`值如果为空，在组件初始化时会为其赋一个默认值（时间模式为当前时间，地区模式为第一个地区选项）
+:::
 
 ### Props extend uni-app picker-view
 
@@ -67,12 +73,6 @@ const region = ref([]);
 | indicatorClass | [属性说明](https://uniapp.dcloud.net.cn/component/picker-view.html) | -            |
 | maskStyle      | [属性说明](https://uniapp.dcloud.net.cn/component/picker-view.html) | -            |
 | maskClass      | [属性说明](https://uniapp.dcloud.net.cn/component/picker-view.html) | -            |
-
-### Events
-
-| 事件名称 | 说明                                                           | 回调参数                                 |
-| -------- | -------------------------------------------------------------- | ---------------------------------------- |
-| change   | 当滚动选择时触发，回调函数第一个参数为`picker-view`的`value`值 | `(value: number[], index: number) => {}` |
 
 ### Methods
 

@@ -71,7 +71,7 @@ const onClear = () => {
 };
 
 const onConfirm = () => {
-  // 点击确定按钮
+  console.log('点击确定按钮');
 };
 ```
 

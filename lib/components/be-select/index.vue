@@ -43,7 +43,7 @@ const props = defineProps({
   },
   value: {
     type: [Number, String, Array],
-    default: null
+    default: undefined
   },
   title: {
     type: String,
@@ -65,6 +65,10 @@ const props = defineProps({
   actionCloseAble: {
     type: Boolean,
     default: true
+  },
+  theme: {
+    type: String,
+    default: '#4a68cc'
   },
   mode: {
     type: String,
@@ -94,10 +98,6 @@ const props = defineProps({
   layout: {
     type: String,
     default: 'default'
-  },
-  theme: {
-    type: String,
-    default: '#4a68cc'
   }
 });
 
