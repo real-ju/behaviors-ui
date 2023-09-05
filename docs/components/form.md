@@ -141,7 +141,7 @@ const login = () => {
 <ExampleIframe url="/pages/form/login" height="300px"></ExampleIframe>
 
 ::: info
-示例中使用了 Input、[Button](/components/button) 组件。
+示例中使用了 [Input](/components/input)、[Button](/components/button) 组件。
 :::
 
 ## API

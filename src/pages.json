@@ -168,6 +168,13 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 选择器
+    {
+      "path": "pages/picker/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

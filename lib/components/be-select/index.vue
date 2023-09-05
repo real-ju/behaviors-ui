@@ -3,7 +3,6 @@
     class="be-select"
     :visible="visible"
     @update:visible="onVisibleUpdate"
-    height="720rpx"
     :title="title"
     :clear-text="clearText"
     :confirm-text="confirmText"

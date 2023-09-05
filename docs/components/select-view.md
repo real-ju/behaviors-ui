@@ -130,17 +130,17 @@ const selectList = ref([
 
 ### Props
 
-| 属性名              | 说明                                              | 类型                                          | 默认值   |
-| ------------------- | ------------------------------------------------- | --------------------------------------------- | -------- |
-| modelValue(v-model) | 当前选中值（数组）                                | `string \| number \| Array<string \| number>` | -        |
-| list                | 列数据                                            | `见示例`                                      | -        |
-| mode                | 选择模式                                          | single \| multiple \| cascade                 | single   |
-| valueName           | 自定义列数据的`value`字段名                       | string                                        | value    |
-| labelName           | 自定义列数据的`label`字段名                       | string                                        | label    |
-| childName           | 自定义列数据的`children`字段名                    | string                                        | children |
-| width               | 宽度                                              | css width                                     | 100%     |
-| height              | 高度                                              | css height                                    | 400rpx   |
-| layout              | 列布局方式。可选值`row-reverse`，水平从右到左排列 | default \| row-reverse                        | default  |
+| 属性名              | 说明                                              | 类型                                          | 默认值    |
+| ------------------- | ------------------------------------------------- | --------------------------------------------- | --------- |
+| modelValue(v-model) | 当前选中值（数组）                                | `string \| number \| Array<string \| number>` | undefined |
+| list                | 列数据                                            | `见示例`                                      | -         |
+| mode                | 选择模式                                          | single \| multiple \| cascade                 | single    |
+| valueName           | 自定义列数据的`value`字段名                       | string                                        | value     |
+| labelName           | 自定义列数据的`label`字段名                       | string                                        | label     |
+| childName           | 自定义列数据的`children`字段名                    | string                                        | children  |
+| width               | 宽度                                              | css width                                     | 100%      |
+| height              | 高度                                              | css height                                    | 400rpx    |
+| layout              | 列布局方式。可选值`row-reverse`，水平从右到左排列 | default \| row-reverse                        | default   |
 
 ::: info
 `v-model`值如果为空，在组件初始化时会为其赋一个默认值（第一个选项）

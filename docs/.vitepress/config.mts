@@ -36,7 +36,9 @@ export default defineConfig({
           { text: 'Image 图片', link: '/components/image' },
           { text: 'Input 输入框', link: '/components/input' },
           { text: 'SelectView 内嵌选择器', link: '/components/select-view' },
-          { text: 'PickerView 内嵌选择器', link: '/components/picker-view' }
+          { text: 'PickerView 内嵌选择器', link: '/components/picker-view' },
+          { text: 'Select 选择器', link: '/components/select' },
+          { text: 'Picker 选择器', link: '/components/picker' }
         ]
       }
     ],

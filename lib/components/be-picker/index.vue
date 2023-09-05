@@ -2,17 +2,19 @@
   <BeSelect
     :mode="selectMode"
     :visible="visible"
-    :update:visible="onVisibleUpdate"
-    v-model.value="selectValue"
+    @update:visible="onVisibleUpdate"
+    v-model:value="selectValue"
     :list="selectList"
     :value-name="selectValueName"
     :label-name="selectLabelName"
+    :layout="layout"
     ref="selectRef"
     :title="title"
     :clear-text="clearText"
     :confirm-text="confirmText"
     :mask-close-able="maskCloseAble"
     :action-close-able="false"
+    :theme="theme"
     @confirm="onConfirm"
     @clear="onClear"
     @change="onChange"
@@ -55,17 +57,37 @@ const basicTimeRange: Recordable = {
 const smallMonths = [4, 6, 9, 11];
 
 const props = defineProps({
-  mode: {
-    type: String,
-    default: 'time' // 默认时间选择 可选region 地区选择
-  },
   visible: {
     type: Boolean,
     default: false
   },
   value: {
-    type: [Number, String, Array],
+    type: [String, Array],
     default: ''
+  },
+  title: {
+    type: String,
+    default: '请选择'
+  },
+  clearText: {
+    type: String,
+    default: '清空'
+  },
+  confirmText: {
+    type: String,
+    default: '确定'
+  },
+  maskCloseAble: {
+    type: Boolean,
+    default: true
+  },
+  theme: {
+    type: String,
+    default: '#4a68cc'
+  },
+  mode: {
+    type: String,
+    default: 'time' // 默认时间选择 可选region 地区选择
   },
   timeFormat: {
     type: String,
@@ -96,7 +118,7 @@ const props = defineProps({
     }
   },
   // 地区模式 指定默认省范围 如'北京市' 为空则表示不限制范围
-  regionRange: {
+  province: {
     type: String,
     default: null
   },
@@ -105,21 +127,9 @@ const props = defineProps({
     type: String,
     default: 'name'
   },
-  title: {
+  layout: {
     type: String,
-    default: '请选择'
-  },
-  clearText: {
-    type: String,
-    default: '清空'
-  },
-  confirmText: {
-    type: String,
-    default: '确定'
-  },
-  maskCloseAble: {
-    type: Boolean,
-    default: true
+    default: 'default'
   }
 });
 
@@ -416,10 +426,10 @@ const initSelectList = () => {
     selectList.value = list;
   } else if (props.mode === 'region') {
     let list;
-    let regionRange = props.regionRange;
-    if (regionRange) {
+    let province = props.province;
+    if (province) {
       list = regionJsonData.filter((item) => {
-        return item.name === regionRange;
+        return item.name === province;
       });
     } else {
       list = regionJsonData;
