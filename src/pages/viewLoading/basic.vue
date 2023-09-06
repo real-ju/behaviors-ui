@@ -1,11 +1,9 @@
 <template>
-  <scroll-view class="playground view-loading-basic-page">
-    <view class="playground-content">
-      <view class="container">
-        <be-view-loading iconSize="26px"></be-view-loading>
-      </view>
+  <view class="playground view-loading-basic-page">
+    <view class="container">
+      <be-view-loading iconSize="26px"></be-view-loading>
     </view>
-  </scroll-view>
+  </view>
 </template>
 
 <script setup lang="ts"></script>

@@ -1,11 +1,9 @@
 <template>
   <view class="playground popup-basic-page">
-    <view class="playground-content">
-      <be-button class="open-btn" hover @click="visible = true">自定义弹框</be-button>
-      <be-popup v-model:visible="visible" position="custom" :maskOpacity="0">
-        <view class="popup-content" @click.stop>这是一段描述文本。</view>
-      </be-popup>
-    </view>
+    <be-button class="open-btn" hover @click="visible = true">自定义弹框</be-button>
+    <be-popup v-model:visible="visible" position="custom" :maskOpacity="0">
+      <view class="popup-content" @click.stop>这是一段描述文本。</view>
+    </be-popup>
   </view>
 </template>
 

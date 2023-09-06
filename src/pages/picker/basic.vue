@@ -1,12 +1,9 @@
 <template>
-  <scroll-view class="playground picker-basic-page">
-    <view class="playground-content">
-      <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
-      <view class="model-result">v-model值：{{ time }}</view>
-      <be-picker title="标题" v-model:visible="visible" mode="time" v-model:value="time">
-      </be-picker>
-    </view>
-  </scroll-view>
+  <view class="playground picker-basic-page">
+    <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
+    <view class="model-result">v-model值：{{ time }}</view>
+    <be-picker title="标题" v-model:visible="visible" mode="time" v-model:value="time"> </be-picker>
+  </view>
 </template>
 
 <script setup lang="ts">

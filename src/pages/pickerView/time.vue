@@ -1,18 +1,16 @@
 <template>
-  <scroll-view class="playground picker-view-time-page">
-    <view class="playground-content">
-      <be-picker-view
-        mode="time"
-        v-model="time"
-        timeFormat="yyyy-MM-dd hh:mm"
-        :timeColumn="['year', 'minute']"
-        :timeRange="{ year: [2022, 2024], hour: [12, 23] }"
-        height="200px"
-      >
-      </be-picker-view>
-      <view class="model-result">v-model值：{{ time }}</view>
-    </view>
-  </scroll-view>
+  <view class="playground picker-view-time-page">
+    <be-picker-view
+      mode="time"
+      v-model="time"
+      timeFormat="yyyy-MM-dd hh:mm"
+      :timeColumn="['year', 'minute']"
+      :timeRange="{ year: [2022, 2024], hour: [12, 23] }"
+      height="200px"
+    >
+    </be-picker-view>
+    <view class="model-result">v-model值：{{ time }}</view>
+  </view>
 </template>
 
 <script setup lang="ts">

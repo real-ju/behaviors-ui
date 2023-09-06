@@ -1,24 +1,22 @@
 <template>
-  <scroll-view class="playground radio-basic-page">
-    <view class="playground-content">
-      <be-radio v-model="model" :options="options">
-        <template #default="{ options, isChecked, selectItem }">
-          <view class="radio1">
-            <view
-              class="item"
-              :class="{ checked: isChecked(item) }"
-              v-for="item in options"
-              :key="item.value"
-              @click="selectItem(item)"
-            >
-              {{ item.title }}
-            </view>
+  <view class="playground radio-basic-page">
+    <be-radio v-model="model" :options="options">
+      <template #default="{ options, isChecked, selectItem }">
+        <view class="radio1">
+          <view
+            class="item"
+            :class="{ checked: isChecked(item) }"
+            v-for="item in options"
+            :key="item.value"
+            @click="selectItem(item)"
+          >
+            {{ item.title }}
           </view>
-        </template>
-      </be-radio>
-      <view class="model-result">v-model值：{{ model }}</view>
-    </view>
-  </scroll-view>
+        </view>
+      </template>
+    </be-radio>
+    <view class="model-result">v-model值：{{ model }}</view>
+  </view>
 </template>
 
 <script setup lang="ts">

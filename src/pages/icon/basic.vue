@@ -1,9 +1,7 @@
 <template>
-  <scroll-view class="playground icon-basic-page">
-    <view class="playground-content">
-      <be-icon name="plus-circle"></be-icon>
-    </view>
-  </scroll-view>
+  <view class="playground icon-basic-page">
+    <be-icon name="plus-circle"></be-icon>
+  </view>
 </template>
 
 <script setup lang="ts"></script>

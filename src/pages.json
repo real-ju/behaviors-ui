@@ -175,6 +175,13 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 懒加载列表
+    {
+      "path": "pages/lazyList/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

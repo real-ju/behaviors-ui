@@ -1,15 +1,13 @@
 <template>
-  <scroll-view class="playground button-status-switch-page">
-    <view class="playground-content">
-      <be-button class="button-1" :loading="loading" :disabled="disabled" disabled-class="disabled">
-        {{ statusText }}
-        <template #loading>
-          <image class="loading-icon" src="/static/button/loading.png" mode="scaleToFill" />
-        </template>
-      </be-button>
-      <be-button class="button-2" hover @click="switchStatus">切换状态</be-button>
-    </view>
-  </scroll-view>
+  <view class="playground button-status-switch-page">
+    <be-button class="button-1" :loading="loading" :disabled="disabled" disabled-class="disabled">
+      {{ statusText }}
+      <template #loading>
+        <image class="loading-icon" src="/static/button/loading.png" mode="scaleToFill" />
+      </template>
+    </be-button>
+    <be-button class="button-2" hover @click="switchStatus">切换状态</be-button>
+  </view>
 </template>
 
 <script setup lang="ts">

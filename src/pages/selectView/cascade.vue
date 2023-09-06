@@ -1,11 +1,9 @@
 <template>
-  <scroll-view class="playground select-view-cascade-page">
-    <view class="playground-content">
-      <be-select-view mode="cascade" v-model="selectValue" :list="selectList" height="200px">
-      </be-select-view>
-      <view class="model-result">v-model值：{{ selectValue }}</view>
-    </view>
-  </scroll-view>
+  <view class="playground select-view-cascade-page">
+    <be-select-view mode="cascade" v-model="selectValue" :list="selectList" height="200px">
+    </be-select-view>
+    <view class="model-result">v-model值：{{ selectValue }}</view>
+  </view>
 </template>
 
 <script setup lang="ts">

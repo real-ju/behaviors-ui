@@ -1,49 +1,47 @@
 <template>
-  <scroll-view class="playground form-login-page">
-    <view class="playground-content">
-      <be-form ref="formRef" v-model:model="model" :rules="rules">
-        <template #default="{ validateField }">
-          <view class="login-form">
-            <be-form-item prop="username" required>
-              <template #default="{ required, error }">
-                <view class="form-item" :class="{ required }">
-                  <view class="label">用户名</view>
-                  <view class="content">
-                    <be-input
-                      class="input"
-                      v-model="model.username"
-                      @input="validateField('username')"
-                    >
-                    </be-input>
-                  </view>
-                  <view v-if="error" class="error-msg">{{ error.message }}</view>
+  <view class="playground form-login-page">
+    <be-form ref="formRef" v-model:model="model" :rules="rules">
+      <template #default="{ validateField }">
+        <view class="login-form">
+          <be-form-item prop="username" required>
+            <template #default="{ required, error }">
+              <view class="form-item" :class="{ required }">
+                <view class="label">用户名</view>
+                <view class="content">
+                  <be-input
+                    class="input"
+                    v-model="model.username"
+                    @input="validateField('username')"
+                  >
+                  </be-input>
                 </view>
-              </template>
-            </be-form-item>
-            <be-form-item prop="password" required>
-              <template #default="{ required, error }">
-                <view class="form-item" :class="{ required }">
-                  <view class="label">密码</view>
-                  <view class="content">
-                    <be-input
-                      class="input"
-                      v-model="model.password"
-                      password
-                      :maxlength="6"
-                      @input="validateField('password')"
-                    >
-                    </be-input>
-                  </view>
-                  <view v-if="error" class="error-msg">{{ error.message }}</view>
+                <view v-if="error" class="error-msg">{{ error.message }}</view>
+              </view>
+            </template>
+          </be-form-item>
+          <be-form-item prop="password" required>
+            <template #default="{ required, error }">
+              <view class="form-item" :class="{ required }">
+                <view class="label">密码</view>
+                <view class="content">
+                  <be-input
+                    class="input"
+                    v-model="model.password"
+                    password
+                    :maxlength="6"
+                    @input="validateField('password')"
+                  >
+                  </be-input>
                 </view>
-              </template>
-            </be-form-item>
-            <be-button class="login-btn" hover @click="login">登录</be-button>
-          </view>
-        </template>
-      </be-form>
-    </view>
-  </scroll-view>
+                <view v-if="error" class="error-msg">{{ error.message }}</view>
+              </view>
+            </template>
+          </be-form-item>
+          <be-button class="login-btn" hover @click="login">登录</be-button>
+        </view>
+      </template>
+    </be-form>
+  </view>
 </template>
 
 <script setup lang="ts">

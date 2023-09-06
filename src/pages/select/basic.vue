@@ -1,18 +1,16 @@
 <template>
-  <scroll-view class="playground select-basic-page">
-    <view class="playground-content">
-      <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
-      <view class="model-result">v-model值：{{ selectValue || 'undefined' }}</view>
-      <be-select
-        title="标题"
-        v-model:visible="visible"
-        mode="single"
-        v-model:value="selectValue"
-        :list="selectList"
-      >
-      </be-select>
-    </view>
-  </scroll-view>
+  <view class="playground select-basic-page">
+    <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
+    <view class="model-result">v-model值：{{ selectValue || 'undefined' }}</view>
+    <be-select
+      title="标题"
+      v-model:visible="visible"
+      mode="single"
+      v-model:value="selectValue"
+      :list="selectList"
+    >
+    </be-select>
+  </view>
 </template>
 
 <script setup lang="ts">

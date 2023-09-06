@@ -1,9 +1,7 @@
 <template>
-  <scroll-view class="playground image-basic-page">
-    <view class="playground-content">
-      <be-image class="image1" src="/static/image/messi.jpeg" mode="widthFix"></be-image>
-    </view>
-  </scroll-view>
+  <view class="playground image-basic-page">
+    <be-image class="image1" src="/static/image/messi.jpeg" mode="widthFix"></be-image>
+  </view>
 </template>
 
 <script setup lang="ts"></script>

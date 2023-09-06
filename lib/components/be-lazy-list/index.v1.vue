@@ -9,7 +9,7 @@
     :refresher-enabled="pullDownRefresh"
     :refresher-triggered="triggered"
     refresher-background="rgba(255, 255, 255, 0)"
-    @refresherrefresh="refreshData()"
+    @refresherrefresh="refreshData"
   >
     <template v-if="ready">
       <slot v-if="listLength > 0"></slot>
@@ -248,7 +248,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:modelValue', 'load']);
+const emit = defineEmits(['update:modelValue', 'load', 'refreshData']);
 
 const ready = ref(false);
 const loading = ref(false);
@@ -292,8 +292,7 @@ const loadMore = () => {
 
 const onLoadSuccess = (datas: Recordable[]) => {
   if (datas && datas.length > 0) {
-    const updateDatas = page.value === 1 ? datas : [...props.modelValue, ...datas];
-    emit('update:modelValue', updateDatas);
+    emit('update:modelValue', [...props.modelValue, ...datas]);
     page.value++;
   } else {
     finished.value = true;
@@ -303,11 +302,9 @@ const onLoadSuccess = (datas: Recordable[]) => {
 
   if (!ready.value) {
     ready.value = true;
-  }
-
-  // 由下拉刷新触发的加载需要关闭下拉状态
-  if (triggered.value) {
-    triggered.value = false;
+    if (triggered.value) {
+      triggered.value = false;
+    }
   }
 };
 
@@ -316,54 +313,50 @@ const onLoadError = () => {
 
   if (!ready.value) {
     ready.value = true;
-  }
-
-  // 由下拉刷新触发的加载需要关闭下拉状态
-  if (triggered.value) {
-    triggered.value = false;
+    if (triggered.value) {
+      triggered.value = false;
+    }
   }
 };
 
 /**
- * 重置组件并加载数据
+ * 重置组件数据并初始化
  */
-const reset = (silent = false) => {
-  if (!silent) {
-    emit('update:modelValue', []);
-    ready.value = false;
-  }
+const reset = () => {
+  emit('update:modelValue', []);
+
+  ready.value = false;
   loading.value = false;
   finished.value = false;
   page.value = 1;
 
-  loadMore();
+  init();
 };
 
 /**
  * 下拉刷新数据
- * @param clear 下拉后是否立即清空列表数据（重置v-model值）
+ * auto=true 表示自动重置列表
+ * auto=false 表示手动刷新 配合@refreshData、reset()、finishRefresh()使用
+ * 注：调用reset()后会自动关闭下拉刷新加载动画，无需再调用finishRefresh()
  */
-const refreshData = (clear = false) => {
+const refreshData = (auto = true) => {
   triggered.value = true;
-  if (ready.value) {
-    if (clear) {
-      reset();
-    } else {
-      reset(true);
-    }
-  } else {
-    // 首次加载未完成不可下拉刷新
-    nextTick(() => {
-      triggered.value = false;
-    });
+  emit('refreshData');
+  if (auto) {
+    reset();
   }
+};
+
+const finishRefresh = () => {
+  triggered.value = false;
 };
 
 init();
 
 defineExpose({
   loadMore,
-  reset
+  reset,
+  finishRefresh
 });
 </script>
 

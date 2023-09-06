@@ -1,9 +1,7 @@
 <template>
-  <scroll-view class="playground button-basic-page">
-    <view class="playground-content">
-      <be-button class="button-1" hover>按钮</be-button>
-    </view>
-  </scroll-view>
+  <view class="playground button-basic-page">
+    <be-button class="button-1" hover>按钮</be-button>
+  </view>
 </template>
 
 <script setup lang="ts"></script>

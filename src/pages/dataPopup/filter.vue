@@ -1,30 +1,28 @@
 <template>
   <view class="playground popup-basic-page">
-    <view class="playground-content">
-      <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
-      <be-data-popup
-        v-model:visible="visible"
-        title="筛选"
-        theme="#4a68cc"
-        @clear="onClear"
-        @confirm="onConfirm"
-      >
-        <view class="data-popup-content">
-          <view class="section">
-            <view class="section-title">类型1</view>
-            <view class="section-content">
-              <FilterRadio v-model="filterData.type1" :options="typeOptions"></FilterRadio>
-            </view>
-          </view>
-          <view class="section">
-            <view class="section-title">类型2</view>
-            <view class="section-content">
-              <FilterRadio v-model="filterData.type2" :options="typeOptions"></FilterRadio>
-            </view>
+    <be-button class="open-btn" hover @click="visible = true">打开弹框</be-button>
+    <be-data-popup
+      v-model:visible="visible"
+      title="筛选"
+      theme="#4a68cc"
+      @clear="onClear"
+      @confirm="onConfirm"
+    >
+      <view class="data-popup-content">
+        <view class="section">
+          <view class="section-title">类型1</view>
+          <view class="section-content">
+            <FilterRadio v-model="filterData.type1" :options="typeOptions"></FilterRadio>
           </view>
         </view>
-      </be-data-popup>
-    </view>
+        <view class="section">
+          <view class="section-title">类型2</view>
+          <view class="section-content">
+            <FilterRadio v-model="filterData.type2" :options="typeOptions"></FilterRadio>
+          </view>
+        </view>
+      </view>
+    </be-data-popup>
   </view>
 </template>
 

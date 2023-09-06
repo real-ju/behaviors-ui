@@ -1,20 +1,18 @@
 <template>
-  <scroll-view class="playground input-basic-page">
-    <view class="playground-content">
-      <be-input
-        class="input2"
-        type="number"
-        v-model="content"
-        placeholder="请输入-100 ~ 100的数字，包括小数"
-        placeholder-class="input2-placeholder"
-        allowNegative
-        allowDecimal
-        :min="-100"
-        :max="100"
-      >
-      </be-input>
-    </view>
-  </scroll-view>
+  <view class="playground input-basic-page">
+    <be-input
+      class="input2"
+      type="number"
+      v-model="content"
+      placeholder="请输入-100 ~ 100的数字，包括小数"
+      placeholder-class="input2-placeholder"
+      allowNegative
+      allowDecimal
+      :min="-100"
+      :max="100"
+    >
+    </be-input>
+  </view>
 </template>
 
 <script setup lang="ts">

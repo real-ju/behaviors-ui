@@ -1,18 +1,16 @@
 <template>
-  <scroll-view class="playground gesture-view-basic-page">
-    <view class="playground-content">
-      <be-gesture-view
-        class="gesture-area"
-        preventScroll
-        @slideLeft="slideLeft"
-        @slideRight="slideRight"
-        @slideTop="slideTop"
-        @slideBottom="slideBottom"
-      >
-        {{ tip }}
-      </be-gesture-view>
-    </view>
-  </scroll-view>
+  <view class="playground gesture-view-basic-page">
+    <be-gesture-view
+      class="gesture-area"
+      preventScroll
+      @slideLeft="slideLeft"
+      @slideRight="slideRight"
+      @slideTop="slideTop"
+      @slideBottom="slideBottom"
+    >
+      {{ tip }}
+    </be-gesture-view>
+  </view>
 </template>
 
 <script setup lang="ts">
