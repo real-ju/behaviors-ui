@@ -23,9 +23,9 @@
       <BeIcon
         v-if="loadingIcon && loadingIcon.name"
         class="loading-icon"
-        :fontFamily="loadingIconProps.fontFamily"
-        :prefix="loadingIconProps.prefix"
-        :name="loadingIconProps.name"
+        :fontFamily="loadingIcon.fontFamily"
+        :prefix="loadingIcon.prefix"
+        :name="loadingIcon.name"
         :style="{
           'font-size': loadingSize,
           color: loadingColor,
@@ -39,11 +39,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Recordable } from '../../types';
-
 import { computed, useSlots } from 'vue';
 import BeIcon from '../be-icon/index.vue';
-import { defaultLoadingIconProps } from './constant';
 
 const props = defineProps({
   /**
@@ -83,9 +80,7 @@ const props = defineProps({
   // 自定义加载图标 Icon组件 props
   loadingIcon: {
     type: Object,
-    default: () => {
-      return { ...defaultLoadingIconProps };
-    }
+    default: null
   },
   // 自定义加载图标大小 font-size值
   loadingSize: {
@@ -127,17 +122,6 @@ const slots = useSlots();
 
 const isCustomLoadingIcon = computed(() => {
   return (props.loadingIcon && props.loadingIcon.name) || slots.loading;
-});
-
-const loadingIconProps = computed<Recordable>(() => {
-  if (!props.loadingIcon) {
-    return {};
-  }
-
-  return {
-    ...defaultLoadingIconProps,
-    ...props.loadingIcon
-  };
 });
 
 const btnHoverClass = computed(() => {

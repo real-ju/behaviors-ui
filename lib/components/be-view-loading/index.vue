@@ -12,9 +12,9 @@
       <BeIcon
         v-if="loadingIcon && loadingIcon.name"
         class="icon"
-        :fontFamily="loadingIconProps.fontFamily"
-        :prefix="loadingIconProps.prefix"
-        :name="loadingIconProps.name"
+        :fontFamily="loadingIcon.fontFamily"
+        :prefix="loadingIcon.prefix"
+        :name="loadingIcon.name"
         :style="{
           'font-size': iconSize,
           color: iconColor
@@ -34,8 +34,7 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
 import BeIcon from '../be-icon/index.vue';
-import assetsUrlLoading from './assets/loading.png';
-import { defaultLoadingIconProps } from './constant';
+import assetsUrlLoading from '../../assets/images/icon-loading.png';
 
 const props = defineProps({
   // 加载图标大小
@@ -46,9 +45,7 @@ const props = defineProps({
   // 自定义加载图标 Icon组件 props
   loadingIcon: {
     type: Object,
-    default: () => {
-      return { ...defaultLoadingIconProps };
-    }
+    default: null
   },
   // 自定义加载图标颜色 color值
   iconColor: {
@@ -76,17 +73,6 @@ const slots = useSlots();
 
 const displayStyle = computed(() => {
   return slots.default ? 'block' : 'flex';
-});
-
-const loadingIconProps = computed<Recordable>(() => {
-  if (!props.loadingIcon) {
-    return {};
-  }
-
-  return {
-    ...defaultLoadingIconProps,
-    ...props.loadingIcon
-  };
 });
 </script>
 

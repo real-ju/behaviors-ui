@@ -51,14 +51,22 @@
           <template v-if="!finished">
             <view class="tip" v-if="!loading">{{ moreText.loadmore }}</view>
             <view class="tip" v-else>
-              <be-icon
-                v-if="moreIcon && moreIcon !== true"
-                class="loading-icon"
-                :font-family="moreIcon.fontFamily"
-                :prefix="moreIcon.prefix"
-                :name="moreIcon.name"
-              >
-              </be-icon>
+              <template v-if="moreIcon !== false">
+                <image
+                  v-if="moreIcon === true"
+                  class="loading-icon"
+                  :style="{ width: moreFontSize, height: moreFontSize }"
+                  :src="assetsUrlLoading"
+                />
+                <BeIcon
+                  v-else-if="moreIcon"
+                  class="loading-icon"
+                  :font-family="moreIcon.fontFamily"
+                  :prefix="moreIcon.prefix"
+                  :name="moreIcon.name"
+                >
+                </BeIcon>
+              </template>
               {{ moreText.loading }}
             </view>
           </template>
@@ -116,14 +124,22 @@
           <template v-if="!finished">
             <view class="tip" v-if="!loading">{{ moreText.loadmore }}</view>
             <view class="tip" v-else>
-              <be-icon
-                v-if="moreIcon && moreIcon !== true"
-                class="loading-icon"
-                :font-family="moreIcon.fontFamily"
-                :prefix="moreIcon.prefix"
-                :name="moreIcon.name"
-              >
-              </be-icon>
+              <template v-if="moreIcon !== false">
+                <image
+                  v-if="moreIcon === true"
+                  class="loading-icon"
+                  :style="{ width: moreFontSize, height: moreFontSize }"
+                  :src="assetsUrlLoading"
+                />
+                <BeIcon
+                  v-else-if="moreIcon"
+                  class="loading-icon"
+                  :font-family="moreIcon.fontFamily"
+                  :prefix="moreIcon.prefix"
+                  :name="moreIcon.name"
+                >
+                </BeIcon>
+              </template>
               {{ moreText.loading }}
             </view>
           </template>
@@ -145,8 +161,10 @@ import type { PropType } from 'vue';
 import type { Recordable } from '../../types';
 
 import { ref, computed } from 'vue';
+import BeIcon from '../be-icon/index.vue';
 import BeViewLoading from '../be-view-loading/index.vue';
 import assetsUrlEmpty from './assets/empty.png';
+import assetsUrlLoading from '../../assets/images/icon-loading.png';
 
 const props = defineProps({
   // 列表数据
@@ -171,16 +189,10 @@ const props = defineProps({
     type: Boolean,
     default: true
   },
-  // 显示加载图标 Icon组件props对象 为false或者null则不显示
+  // 显示加载图标 Icon组件props对象 为false则不显示
   moreIcon: {
     type: [Object, Boolean],
-    default: () => {
-      return {
-        fontFamily: 'iconfont',
-        prefix: 'icon-',
-        name: 'loading'
-      };
-    }
+    default: true
   },
   moreText: {
     type: Object as PropType<Recordable>,
@@ -363,7 +375,8 @@ init();
 
 defineExpose({
   loadMore,
-  reset
+  reset,
+  refresh: refreshData
 });
 </script>
 
@@ -401,15 +414,15 @@ export default {
     .tip {
       display: flex;
       align-items: center;
+
+      .loading-icon {
+        margin-right: 10rpx;
+        animation: uni-loading 1s linear infinite;
+      }
     }
 
     .disable-tip {
       opacity: 0.7;
-    }
-
-    .loading-icon {
-      margin-right: 10rpx;
-      animation: uni-loading 1s linear infinite;
     }
   }
 

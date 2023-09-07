@@ -17,6 +17,7 @@
     :adjust-position="adjustPosition"
     disable-default-padding
     @input="onInput"
+    @focus="onFocus"
     @blur="onBlur"
   />
 </template>
@@ -84,14 +85,18 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:modelValue', 'blur']);
+const emit = defineEmits(['update:modelValue', 'focus', 'blur']);
 
 const onInput = (event: any) => {
   emit('update:modelValue', event.detail.value);
 };
 
+const onFocus = (event: any) => {
+  emit('focus', event);
+};
+
 const onBlur = (event: any) => {
-  emit('blur', event.detail.value);
+  emit('blur', event);
 };
 </script>
 

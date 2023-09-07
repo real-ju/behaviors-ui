@@ -50,6 +50,7 @@ const loadData = (page: number, onLoadSuccess: Function, onLoadError: Function, 
     .item {
       width: 100%;
       padding: 30px 0px;
+      font-size: 15px;
 
       & + .item {
         border-top: 1px solid #eeeeee;

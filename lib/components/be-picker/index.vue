@@ -32,7 +32,7 @@ import type { Recordable } from '../../types';
 
 import { ref, computed, watch } from 'vue';
 import BeSelect from '../be-select/index.vue';
-import regionJsonData from '../../assets/region/region.json';
+import regionJsonData from '../../assets/geo/region.json';
 
 const timeMarkMap = ['second', 'minute', 'hour', 'day', 'month', 'year'];
 

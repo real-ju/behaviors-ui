@@ -35,6 +35,7 @@ export default defineConfig({
           { text: 'GestureView 手势视图', link: '/components/gesture-view' },
           { text: 'Image 图片', link: '/components/image' },
           { text: 'Input 输入框', link: '/components/input' },
+          { text: 'LazyList 懒加载列表', link: '/components/lazy-list' },
           { text: 'SelectView 内嵌选择器', link: '/components/select-view' },
           { text: 'PickerView 内嵌选择器', link: '/components/picker-view' },
           { text: 'Select 选择器', link: '/components/select' },
