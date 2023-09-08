@@ -182,6 +182,20 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 文本域
+    {
+      "path": "pages/textarea/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    // 上传-多图上传
+    {
+      "path": "pages/upload/image",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

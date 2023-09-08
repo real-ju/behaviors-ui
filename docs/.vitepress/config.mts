@@ -39,7 +39,9 @@ export default defineConfig({
           { text: 'SelectView 内嵌选择器', link: '/components/select-view' },
           { text: 'PickerView 内嵌选择器', link: '/components/picker-view' },
           { text: 'Select 选择器', link: '/components/select' },
-          { text: 'Picker 选择器', link: '/components/picker' }
+          { text: 'Picker 选择器', link: '/components/picker' },
+          { text: 'Textarea 文本域', link: '/components/textarea' },
+          { text: 'Upload 上传', link: '/components/upload' }
         ]
       }
     ],

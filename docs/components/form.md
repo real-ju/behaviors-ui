@@ -130,7 +130,7 @@ const login = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 14px;
     color: #ffffff;
   }
 }

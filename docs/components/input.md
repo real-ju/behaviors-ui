@@ -105,10 +105,10 @@ const content = ref();
 
 ### Events extend uni-app input
 
-| 事件名称 | 说明                                                           |
-| -------- | -------------------------------------------------------------- |
-| focus    | [事件说明](https://uniapp.dcloud.net.cn/component/button.html) |
-| blur     | [事件说明](https://uniapp.dcloud.net.cn/component/button.html) |
+| 事件名称 | 说明                                                          |
+| -------- | ------------------------------------------------------------- |
+| focus    | [事件说明](https://uniapp.dcloud.net.cn/component/input.html) |
+| blur     | [事件说明](https://uniapp.dcloud.net.cn/component/input.html) |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";
