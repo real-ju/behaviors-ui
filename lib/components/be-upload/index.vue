@@ -55,7 +55,7 @@ const props = defineProps({
   /**
    * 默认显示已上传的文件列表
    * -更改后会重新初始化fileList
-   * -初始化时会自动更新v-modal值
+   * -初始化时会自动更新v-model值
    */
   defaultFileList: {
     type: Array as PropType<DefaultFileList>,

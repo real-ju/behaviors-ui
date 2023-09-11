@@ -69,16 +69,22 @@ const options = ref([
 
 ### Props
 
-| 属性名              | 说明                    | 类型                                                                                       | 默认值 |
-| ------------------- | ----------------------- | ------------------------------------------------------------------------------------------ | ------ |
-| modelValue(v-model) | 当前选中项的 value 数组 | `Array<string \| number>`                                                                  | `[]`   |
-| options             | 选项数据                | `Array<{ title: string, value: string \| number, disabled?: boolean, desc?: Recordable }>` | `[]`   |
+| 属性名              | 说明                    | 类型                      | 默认值 |
+| ------------------- | ----------------------- | ------------------------- | ------ |
+| modelValue(v-model) | 当前选中项的 value 数组 | `Array<string \| number>` | `[]`   |
+| options             | 选项数据                | `Array<CheckboxOption>`   | `[]`   |
 
 ### Slots
 
 | 插槽名  | 说明 | slot props                                                                                                                     | 默认值 |
 | ------- | ---- | ------------------------------------------------------------------------------------------------------------------------------ | ------ |
 | default | 视图 | `{ options: Array<CheckboxOption>, isChecked: (item: CheckboxOption) => boolean, selectItem: (item: CheckboxOption) => void }` | 无     |
+
+### Types
+
+| 类型名         | 值                                                                              | 说明 |
+| -------------- | ------------------------------------------------------------------------------- | ---- |
+| CheckboxOption | `{ title: string, value: string \| number, disabled?: boolean, desc?: object }` | -    |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

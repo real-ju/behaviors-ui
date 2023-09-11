@@ -134,11 +134,42 @@ const upload = async () => {
 
 ### Props
 
-| 属性名     | 说明                                    | 类型   | 默认值   |
-| ---------- | --------------------------------------- | ------ | -------- |
-| fontFamily | 阿里巴巴图标库项目配置的 FontFamily     | string | iconfont |
-| prefix     | 阿里巴巴图标库项目配置的 FontClass 前缀 | string | icon-    |
-| name       | 阿里巴巴图标库项目配置的 FontClass 名   | string | -        |
+| 属性名              | 说明                                                | 类型                                                   | 默认值                                  |
+| ------------------- | --------------------------------------------------- | ------------------------------------------------------ | --------------------------------------- |
+| modelValue(v-model) | 当前上传成功的文件 url 列表                         | `string[]`                                             | `[]`                                    |
+| defaultFileList     | 默认已上传的文件列表，初始化时会自动更新 v-model 值 | `Array<{ type: FileType, name: string, url: string }>` | `[]`                                    |
+| chooseImageConfig   | 选择图片配置                                        | `ChooseImageConfig`                                    | -                                       |
+| chooseVideoConfig   | 选择视频配置                                        | `ChooseVideoConfig`                                    | -                                       |
+| autoUpload          | 选择文件后是否自动上传                              | boolean                                                | true                                    |
+| maxCount            | 可上传文件数量限制                                  | number                                                 | Infinity                                |
+| action              | 上传接口地址                                        | string                                                 | -                                       |
+| header              | 上传请求头部                                        | object                                                 | -                                       |
+| formData            | 上传请求额外参数                                    | object                                                 | -                                       |
+| hooks               | 上传钩子函数，必须有 onResponse 钩子函数            | `UploadHooks`                                          | `{ onResponse: (res: any) => res.url }` |
+
+### Slots
+
+| 插槽名  | 说明     | slot props               | 默认值 |
+| ------- | -------- | ------------------------ | ------ |
+| default | 上传视图 | `{ fileList: FileList }` | 无     |
+
+### Types
+
+| 类型名             | 值                                                                                                                                                                                      | 说明                                                                                                                                                            |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| FileType           | `'image' \| 'video'`                                                                                                                                                                    | -                                                                                                                                                               |
+| ChooseImageConfig  | `Pick<UniNamespace.ChooseImageOptions, 'count' \| 'sizeType' \| 'sourceType'> & { maxSize?: number }`                                                                                   | `UniNamespace.ChooseImageOptions`：[uni.chooseImage](https://uniapp.dcloud.net.cn/api/media/image.html) 的参数。maxSize：选择图片最大限制（单位 KB），默认 10M  |
+| ChooseVideoConfig  | `Pick<UniNamespace.ChooseVideoOptions, 'sourceType' \| 'compressed' \| 'maxDuration' \| 'camera'> & { maxSize?: number }`                                                               | `UniNamespace.ChooseVideoOptions`：[uni.chooseVideo](https://uniapp.dcloud.net.cn/api/media/video.html) 的参数。maxSize：选择视频最大限制（单位 KB），默认 100M |
+| UploadHooks        | `{ onResponse: ResponseHook, onUploaded?: UploadedHook, onChooseComplete?: ChooseCompleteHook, onChooseFail?: ChooseFailHook, onOversize?: OversizeHook, onOverCount?: OverCountHook }` | -                                                                                                                                                               |
+| ResponseHook       | `(res: any) => string \| null \| undefined`                                                                                                                                             | 上传接口请求成功（状态码 200），每个文件会触发一次。参数`res`为接口返回的数据，函数需返回文件的 url，返回值为空则表示上传失败                                   |
+| UploadedHook       | `(results: any[]) => void`                                                                                                                                                              | 全部文件上传完毕（包括失败）                                                                                                                                    |
+| ChooseCompleteHook | `(res: any) => void`                                                                                                                                                                    | 文件选择完成                                                                                                                                                    |
+| ChooseFailHook     | `(error: any) => void`                                                                                                                                                                  | 文件选择失败                                                                                                                                                    |
+| OversizeHook       | `(error: { type: FileType }) => void`                                                                                                                                                   | 文件大小超出限制                                                                                                                                                |
+| OverCountHook      | `() => void`                                                                                                                                                                            | 文件数量超出限制                                                                                                                                                |
+| FileList           | `Array<UploadFile>`                                                                                                                                                                     | 文件列表（只读 Ref）                                                                                                                                            |
+| UploadFile         | `{ uuid: string, type: FileType, name: string, url: string, status: UploadStatus, progress: number, response?: any }`                                                                   | 文件对象                                                                                                                                                        |
+| UploadStatus       | `'local' \|'progress' \|'success' \|'error'`                                                                                                                                            | 文件状态。`local`本地 `progress`上传中 `success`上传成功 `error`上传失败                                                                                        |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

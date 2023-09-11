@@ -69,16 +69,22 @@ const options = ref([
 
 ### Props
 
-| 属性名              | 说明               | 类型                                                                                       | 默认值    |
-| ------------------- | ------------------ | ------------------------------------------------------------------------------------------ | --------- |
-| modelValue(v-model) | 当前选中项的 value | string \| number                                                                           | undefined |
-| options             | 选项数据           | `Array<{ title: string, value: string \| number, disabled?: boolean, desc?: Recordable }>` | `[]`      |
+| 属性名              | 说明               | 类型                 | 默认值    |
+| ------------------- | ------------------ | -------------------- | --------- |
+| modelValue(v-model) | 当前选中项的 value | string \| number     | undefined |
+| options             | 选项数据           | `Array<RadioOption>` | `[]`      |
 
 ### Slots
 
 | 插槽名  | 说明 | slot props                                                                                                            | 默认值 |
 | ------- | ---- | --------------------------------------------------------------------------------------------------------------------- | ------ |
 | default | 视图 | `{ options: Array<RadioOption>, isChecked: (item: RadioOption) => boolean, selectItem: (item: RadioOption) => void }` | 无     |
+
+### Types
+
+| 类型名      | 值                                                                              | 说明 |
+| ----------- | ------------------------------------------------------------------------------- | ---- |
+| RadioOption | `{ title: string, value: string \| number, disabled?: boolean, desc?: object }` | -    |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";

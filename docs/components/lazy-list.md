@@ -96,12 +96,12 @@ const loadData = (page: number, onLoadSuccess: Function, onLoadError: Function, 
 
 ### Slots
 
-| 插槽名  | 说明                                                                                | slot props                                                    | 默认值 |
-| ------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------ |
-| empty   | 自定义空提示视图                                                                    | -                                                             | 有     |
-| more    | 自定义加载更多视图                                                                  | `{ loading: boolean, finished: boolean, loadMore: Function }` | 有     |
-| loading | 自定义初始化加载中视图，该插槽会传递给 [ViewLoading](/components/view-loading) 组件 | -                                                             | 有     |
-| default | 列表视图                                                                            | -                                                             | 无     |
+| 插槽名  | 说明                                                                                | slot props                                                      | 默认值 |
+| ------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------- | ------ |
+| empty   | 自定义空提示视图                                                                    | -                                                               | 有     |
+| more    | 自定义加载更多视图                                                                  | `{ loading: boolean, finished: boolean, loadMore: () => void }` | 有     |
+| loading | 自定义初始化加载中视图，该插槽会传递给 [ViewLoading](/components/view-loading) 组件 | -                                                               | 有     |
+| default | 列表视图                                                                            | -                                                               | 无     |
 
 ### Methods
 
