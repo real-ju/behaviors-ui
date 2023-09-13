@@ -73,6 +73,7 @@ const upload = async () => {
       font-size: 40px;
       color: #999999;
       transition: all 0.2s;
+      cursor: pointer;
 
       &:active {
         background-color: darken(#eef1f9, 5%);

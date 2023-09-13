@@ -149,9 +149,27 @@ const upload = async () => {
 
 ### Slots
 
-| 插槽名  | 说明     | slot props               | 默认值 |
-| ------- | -------- | ------------------------ | ------ |
-| default | 上传视图 | `{ fileList: FileList }` | 无     |
+| 插槽名  | 说明                               | slot props                                                                              | 默认值 |
+| ------- | ---------------------------------- | --------------------------------------------------------------------------------------- | ------ |
+| default | 上传视图。props 详细说明参见下方。 | `{ fileList, chooseImage, chooseVideo, previewImage, remove, clear, upload, reUpload }` | 无     |
+
+### Readonly Data
+
+| 数据名   | 说明     | 类型            |
+| -------- | -------- | --------------- |
+| fileList | 文件列表 | `Ref<FileList>` |
+
+### Methods
+
+| 方法名       | 说明                                                             | 参数                                   |
+| ------------ | ---------------------------------------------------------------- | -------------------------------------- |
+| chooseImage  | 选择图片                                                         | `(config?: ChooseImageConfig) => void` |
+| chooseVideo  | 选择视频                                                         | `(config?: ChooseVideoConfig) => void` |
+| previewImage | 预览图片                                                         | `(file: UploadFile) => void`           |
+| remove       | 从列表移除文件                                                   | `(file: UploadFile) => void`           |
+| clear        | 清空文件列表                                                     | `() => void`                           |
+| upload       | 上传文件。`file`参数不传则上传所有文件。                         | `(file?: UploadFile) => void`          |
+| reUpload     | 重新上传失败状态的文件。`file`参数不传则上传所有失败状态的文件。 | `(file?: UploadFile) => void`          |
 
 ### Types
 
@@ -167,7 +185,7 @@ const upload = async () => {
 | ChooseFailHook     | `(error: any) => void`                                                                                                                                                                  | 文件选择失败                                                                                                                                                    |
 | OversizeHook       | `(error: { type: FileType }) => void`                                                                                                                                                   | 文件大小超出限制                                                                                                                                                |
 | OverCountHook      | `() => void`                                                                                                                                                                            | 文件数量超出限制                                                                                                                                                |
-| FileList           | `Array<UploadFile>`                                                                                                                                                                     | 文件列表（只读 Ref）                                                                                                                                            |
+| FileList           | `Array<UploadFile>`                                                                                                                                                                     | 文件列表                                                                                                                                                        |
 | UploadFile         | `{ uuid: string, type: FileType, name: string, url: string, status: UploadStatus, progress: number, response?: any }`                                                                   | 文件对象                                                                                                                                                        |
 | UploadStatus       | `'local' \|'progress' \|'success' \|'error'`                                                                                                                                            | 文件状态。`local`本地 `progress`上传中 `success`上传成功 `error`上传失败                                                                                        |
 

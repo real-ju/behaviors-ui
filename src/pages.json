@@ -196,6 +196,13 @@
       "style": {
         "navigationStyle": "custom"
       }
+    },
+    // 视频
+    {
+      "path": "pages/video/basic",
+      "style": {
+        "navigationStyle": "custom"
+      }
     }
   ],
   "globalStyle": {

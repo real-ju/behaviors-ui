@@ -1,13 +1,17 @@
 <template>
   <view class="be-video be deep" :class="[rootClass ? rootClass : '']" :style="rootStyle">
-    <view class="cover" v-if="!play" @click="play = true">
+    <view class="cover" v-if="showCover" @click="play">
       <slot name="cover">
-        <image class="bg" :src="imgSrc" mode="aspectFill"></image>
-        <image class="play-btn" :src="playSrc" :style="{ width: playWidth, height: playHeight }">
+        <image class="bg" :src="coverSrc" mode="aspectFill"></image>
+        <image
+          class="play-btn"
+          :src="playBtnSrc"
+          :style="{ width: playBtnWidth, height: playBtnHeight }"
+        >
         </image>
       </slot>
     </view>
-    <video :src="videoSrc" :autoplay="autoPlay" @play="onVideoPlay"></video>
+    <video :id="videoId" :src="src" @play="onPlay"></video>
   </view>
 </template>
 
@@ -26,48 +30,52 @@ const props = defineProps({
     type: String,
     default: ''
   },
-  imgSrc: {
+  src: {
     type: String,
     default: ''
   },
-  videoSrc: {
+  coverSrc: {
     type: String,
     default: ''
   },
-  playSrc: {
+  playBtnSrc: {
     type: String,
     default: assetsUrlPlay
   },
-  playWidth: {
+  playBtnWidth: {
     type: String,
     default: '100rpx'
   },
-  playHeight: {
+  playBtnHeight: {
     type: String,
     default: '100rpx'
   },
   hideCover: {
     type: Boolean,
     default: false
-  },
-  autoPlay: {
-    type: Boolean,
-    default: true
   }
 });
 
-const emit = defineEmits(['video-play']);
+const emit = defineEmits(['play']);
 
-const play = ref(false);
+const showCover = ref(true);
+const videoId = `be-video-${Date.now()}`;
 
 const init = () => {
   if (props.hideCover) {
-    play.value = true;
+    showCover.value = false;
   }
 };
 
-const onVideoPlay = () => {
-  emit('video-play');
+const play = () => {
+  showCover.value = false;
+  const videoContext = uni.createVideoContext(videoId);
+  console.log(videoContext);
+  videoContext.play();
+};
+
+const onPlay = () => {
+  emit('play');
 };
 
 init();
@@ -90,6 +98,7 @@ export default {
     width: 100%;
     height: 100%;
     position: relative;
+    cursor: pointer;
 
     .bg {
       width: 100%;
