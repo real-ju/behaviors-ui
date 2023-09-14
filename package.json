@@ -105,5 +105,8 @@
     "src/**/*.{js,json,ts,tsx,css,less,scss,vue,html,md}": "prettier --write",
     "src/**/*.{js,ts,tsx,vue}": "eslint --cache --fix",
     "types/**/*.{d.ts,ts}": "eslint --cache --fix"
-  }
+  },
+  "workspaces": [
+    "packages/behaviors-ui"
+  ]
 }

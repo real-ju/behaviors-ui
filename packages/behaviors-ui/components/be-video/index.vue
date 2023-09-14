@@ -11,7 +11,7 @@
         </image>
       </slot>
     </view>
-    <video :id="videoId" :src="src" @play="onPlay"></video>
+    <video :id="videoId" :src="src" :autoplay="autoplay" @play="onPlay"></video>
   </view>
 </template>
 
@@ -60,6 +60,7 @@ const emit = defineEmits(['play']);
 
 const showCover = ref(true);
 const videoId = `be-video-${Date.now()}`;
+const autoplay = ref(false);
 
 const init = () => {
   if (props.hideCover) {
@@ -69,9 +70,13 @@ const init = () => {
 
 const play = () => {
   showCover.value = false;
+  // #ifdef H5
   const videoContext = uni.createVideoContext(videoId);
-  console.log(videoContext);
   videoContext.play();
+  // #endif
+  // #ifdef MP-WEIXIN
+  autoplay.value = true;
+  // #endif
 };
 
 const onPlay = () => {

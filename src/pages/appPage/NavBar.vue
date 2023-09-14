@@ -1,6 +1,6 @@
 <template>
   <view class="action-bar" :class="{ dark: bgTheme === 'dark' }">
-    <view class="back-btn">&lt;</view>
+    <view class="back-btn">{{ '<' }}</view>
     <view class="title">{{ title }}</view>
   </view>
 </template>

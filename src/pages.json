@@ -214,7 +214,7 @@
   "easycom": {
     "custom": {
       "^u-(.*)": "uview-plus/components/u-$1/u-$1.vue",
-      "^be-(.*)": "/lib/components/be-$1/index.vue"
+      "^be-(.*)": "behaviors-ui/components/be-$1/index.vue"
     }
   }
 }
