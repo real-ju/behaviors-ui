@@ -85,3 +85,6 @@ export interface UploadHooks {
    */
   onOverCount?: () => void;
 }
+
+// 获取formData的工厂函数
+export type FormDataFactory = (file: UploadFile) => Recordable;

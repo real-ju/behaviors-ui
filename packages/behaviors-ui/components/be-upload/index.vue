@@ -22,7 +22,8 @@ import type {
   DefaultFileList,
   UploadFile,
   FileList,
-  UploadHooks
+  UploadHooks,
+  FormDataFactory
 } from './types';
 import type { Recordable } from '../../types';
 import { FileType, UploadStatus } from './types';
@@ -104,7 +105,7 @@ const props = defineProps({
     }
   },
   formData: {
-    type: Object as PropType<Recordable>,
+    type: Object as PropType<Recordable | FormDataFactory>,
     default: () => {
       return {};
     }
@@ -328,13 +329,15 @@ const upload = async (singleFile: UploadFile | null = null) => {
   let tasks = uploadFiles.map((file) => {
     return new Promise((resolve, reject) => {
       file.status = UploadStatus.PROGRESS;
+      const formData =
+        typeof props.formData === 'function' ? props.formData(file) || {} : props.formData;
       let uploadTask = uni.uploadFile({
         url: props.action,
         fileType: file.type,
         filePath: file.url,
         name: 'file',
         header: props.header,
-        formData: props.formData,
+        formData,
         success: (res) => {
           if (res.statusCode !== 200 || !res.data) {
             reject(res);
@@ -367,8 +370,11 @@ const upload = async (singleFile: UploadFile | null = null) => {
     });
   });
   const uploadRes = await Promise.allSettled(tasks).then((results: any[]) => {
-    const res = results.map((item) => {
-      return item.status === 'fulfilled' ? JSON.parse(item.value.data) : item.reason;
+    const res = results.map((item, index) => {
+      return {
+        file: uploadFiles[index],
+        res: item.status === 'fulfilled' ? JSON.parse(item.value.data) : item.reason
+      };
     });
     props.hooks.onUploaded && props.hooks.onUploaded(res);
     return res;

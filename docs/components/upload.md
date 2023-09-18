@@ -144,7 +144,7 @@ const upload = async () => {
 | maxCount            | 可上传文件数量限制                                  | number                                                 | Infinity                                |
 | action              | 上传接口地址                                        | string                                                 | -                                       |
 | header              | 上传请求头部                                        | object                                                 | -                                       |
-| formData            | 上传请求额外参数                                    | object                                                 | -                                       |
+| formData            | 上传请求额外参数                                    | `object \| FormDataFactory`                            | -                                       |
 | hooks               | 上传钩子函数，必须有 onResponse 钩子函数            | `UploadHooks`                                          | `{ onResponse: (res: any) => res.url }` |
 
 ### Slots
@@ -161,15 +161,15 @@ const upload = async () => {
 
 ### Methods
 
-| 方法名       | 说明                                                             | 参数                                   |
-| ------------ | ---------------------------------------------------------------- | -------------------------------------- |
-| chooseImage  | 选择图片                                                         | `(config?: ChooseImageConfig) => void` |
-| chooseVideo  | 选择视频                                                         | `(config?: ChooseVideoConfig) => void` |
-| previewImage | 预览图片                                                         | `(file: UploadFile) => void`           |
-| remove       | 从列表移除文件                                                   | `(file: UploadFile) => void`           |
-| clear        | 清空文件列表                                                     | `() => void`                           |
-| upload       | 上传文件。`file`参数不传则上传所有文件。                         | `(file?: UploadFile) => void`          |
-| reUpload     | 重新上传失败状态的文件。`file`参数不传则上传所有失败状态的文件。 | `(file?: UploadFile) => void`          |
+| 方法名       | 说明                                                             | 参数                                                                    |
+| ------------ | ---------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| chooseImage  | 选择图片                                                         | `(config?: ChooseImageConfig) => void`                                  |
+| chooseVideo  | 选择视频                                                         | `(config?: ChooseVideoConfig) => void`                                  |
+| previewImage | 预览图片                                                         | `(file: UploadFile) => void`                                            |
+| remove       | 从列表移除文件                                                   | `(file: UploadFile) => void`                                            |
+| clear        | 清空文件列表                                                     | `() => void`                                                            |
+| upload       | 上传文件。`file`参数不传则上传所有文件。                         | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, res: any }>>` |
+| reUpload     | 重新上传失败状态的文件。`file`参数不传则上传所有失败状态的文件。 | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, res: any }>>` |
 
 ### Types
 
@@ -188,6 +188,7 @@ const upload = async () => {
 | FileList           | `Array<UploadFile>`                                                                                                                                                                     | 文件列表                                                                                                                                                        |
 | UploadFile         | `{ uuid: string, type: FileType, name: string, url: string, status: UploadStatus, progress: number, response?: any }`                                                                   | 文件对象                                                                                                                                                        |
 | UploadStatus       | `'local' \|'progress' \|'success' \|'error'`                                                                                                                                            | 文件状态。`local`本地 `progress`上传中 `success`上传成功 `error`上传失败                                                                                        |
+| FormDataFactory    | `(file: UploadFile) => object`                                                                                                                                                          | 获取 formData 的工厂函数                                                                                                                                        |
 
 <script setup lang="ts">
 import ExampleIframe from "../src/ExampleIframe.vue";
