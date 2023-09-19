@@ -1,0 +1,1 @@
+import{_ as s,c as a,o as l,S as o}from"./chunks/framework.6dd19598.js";const u=JSON.parse('{"title":"注意事项","description":"","frontmatter":{},"headers":[],"relativePath":"note.md","filePath":"note.md"}'),e={name:"note.md"},n=o("",15),t=[n];function p(c,r,i,d,y,D){return l(),a("div",null,t)}const C=s(e,[["render",p]]);export{u as __pageData,C as default};
