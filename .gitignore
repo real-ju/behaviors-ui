@@ -9,11 +9,12 @@ lerna-debug.log*
 
 node_modules
 .DS_Store
-/dist
+dist
 dist-ssr
 *.local
 .eslintcache
 docs/.vitepress/cache
+docs/.vitepress/dist
 
 # Editor directories and files
 # .vscode/*

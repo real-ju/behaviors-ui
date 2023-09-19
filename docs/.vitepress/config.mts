@@ -11,7 +11,6 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '组件', link: '/introduce' }
     ],
-
     sidebar: [
       {
         text: '起步',
