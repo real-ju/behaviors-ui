@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: '/behaviors-ui/',
   title: 'BehaviorsUI',
   description: 'BehaviorsUI文档',
   themeConfig: {
@@ -46,7 +47,6 @@ export default defineConfig({
         ]
       }
     ],
-
     socialLinks: [{ icon: 'github', link: 'https://github.com/real-ju/behaviors-ui' }]
   }
 });
