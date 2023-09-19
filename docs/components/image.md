@@ -5,7 +5,7 @@
 ::: code-group
 
 ```html [template]
-<be-image class="image1" src="/static/xxx/xxx.jpeg" mode="widthFix"></be-image>
+<be-image class="image1" src="/static/xxx/xxx.jpg" mode="widthFix"></be-image>
 ```
 
 ```scss [style scoped]

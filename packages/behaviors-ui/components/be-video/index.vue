@@ -38,6 +38,10 @@ const props = defineProps({
     type: String,
     default: ''
   },
+  hideCover: {
+    type: Boolean,
+    default: false
+  },
   playBtnSrc: {
     type: String,
     default: assetsUrlPlay
@@ -49,10 +53,6 @@ const props = defineProps({
   playBtnHeight: {
     type: String,
     default: '100rpx'
-  },
-  hideCover: {
-    type: Boolean,
-    default: false
   }
 });
 

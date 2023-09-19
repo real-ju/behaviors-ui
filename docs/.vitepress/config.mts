@@ -41,7 +41,8 @@ export default defineConfig({
           { text: 'Select 选择器', link: '/components/select' },
           { text: 'Picker 选择器', link: '/components/picker' },
           { text: 'Textarea 文本域', link: '/components/textarea' },
-          { text: 'Upload 上传', link: '/components/upload' }
+          { text: 'Upload 上传', link: '/components/upload' },
+          { text: 'Video 视频', link: '/components/video' }
         ]
       }
     ],

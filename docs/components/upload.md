@@ -168,8 +168,8 @@ const upload = async () => {
 | previewImage | 预览图片                                                         | `(file: UploadFile) => void`                                            |
 | remove       | 从列表移除文件                                                   | `(file: UploadFile) => void`                                            |
 | clear        | 清空文件列表                                                     | `() => void`                                                            |
-| upload       | 上传文件。`file`参数不传则上传所有文件。                         | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, res: any }>>` |
-| reUpload     | 重新上传失败状态的文件。`file`参数不传则上传所有失败状态的文件。 | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, res: any }>>` |
+| upload       | 上传文件。`file`参数不传则上传所有文件。                         | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, result: any }>>` |
+| reUpload     | 重新上传失败状态的文件。`file`参数不传则上传所有失败状态的文件。 | `(file?: UploadFile) => Promise<Array<{ file: UploadFile, result: any }>>` |
 
 ### Types
 

@@ -340,6 +340,8 @@ const upload = async (singleFile: UploadFile | null = null) => {
         formData,
         success: (res) => {
           if (res.statusCode !== 200 || !res.data) {
+            file.status = UploadStatus.ERROR;
+            file.progress = 0;
             reject(res);
             return;
           }
@@ -355,7 +357,8 @@ const upload = async (singleFile: UploadFile | null = null) => {
           } else {
             file.status = UploadStatus.ERROR;
             file.progress = 0;
-            reject(res);
+            const error = new Error('onResponse 没有返回文件 URL');
+            reject(error);
           }
         },
         fail: (error) => {
@@ -373,7 +376,7 @@ const upload = async (singleFile: UploadFile | null = null) => {
     const res = results.map((item, index) => {
       return {
         file: uploadFiles[index],
-        res: item.status === 'fulfilled' ? JSON.parse(item.value.data) : item.reason
+        result: item.status === 'fulfilled' ? JSON.parse(item.value.data) : item.reason
       };
     });
     props.hooks.onUploaded && props.hooks.onUploaded(res);
