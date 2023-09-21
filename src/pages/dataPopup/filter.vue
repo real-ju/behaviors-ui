@@ -79,6 +79,7 @@ const onConfirm = () => {
     .section-title {
       width: 100%;
       padding: 10px 0px;
+      font-size: 14px;
     }
 
     .section-content {
