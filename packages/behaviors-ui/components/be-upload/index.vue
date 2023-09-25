@@ -428,7 +428,10 @@ defineExpose({
 
 <script lang="ts">
 export default {
-  name: 'BeUpload'
+  name: 'BeUpload',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

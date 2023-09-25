@@ -88,7 +88,10 @@ init();
 
 <script lang="ts">
 export default {
-  name: 'BeVideo'
+  name: 'BeVideo',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

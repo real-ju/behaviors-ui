@@ -545,7 +545,10 @@ defineExpose({
 
 <script lang="ts">
 export default {
-  name: 'BePickerView'
+  name: 'BePickerView',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

@@ -288,7 +288,10 @@ initAnimation();
 
 <script lang="ts">
 export default {
-  name: 'BePopup'
+  name: 'BePopup',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

@@ -168,7 +168,10 @@ defineExpose({
 
 <script lang="ts">
 export default {
-  name: 'BeAppPage'
+  name: 'BeAppPage',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

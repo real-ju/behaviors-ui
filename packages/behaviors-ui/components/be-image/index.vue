@@ -69,7 +69,10 @@ init();
 
 <script lang="ts">
 export default {
-  name: 'BeImage'
+  name: 'BeImage',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

@@ -382,7 +382,10 @@ defineExpose({
 
 <script lang="ts">
 export default {
-  name: 'BeLazyList'
+  name: 'BeLazyList',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

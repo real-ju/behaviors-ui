@@ -45,8 +45,6 @@ import BeIcon from '../be-icon/index.vue';
 const props = defineProps({
   /**
    * 设置根元素class
-   * 1.非scoped模式，需要在css选择器中加上.be.deep提高优先级，如test.be.deep
-   * 2.scoped模式，使用:deep样式穿透
    */
   rootClass: {
     type: String,
@@ -149,7 +147,10 @@ const onClick = (event: any) => {
 
 <script lang="ts">
 export default {
-  name: 'BeButton'
+  name: 'BeButton',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

@@ -65,7 +65,10 @@ const selectItem = (item: CheckboxOption) => {
 
 <script lang="ts">
 export default {
-  name: 'BeCheckbox'
+  name: 'BeCheckbox',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

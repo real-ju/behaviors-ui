@@ -121,7 +121,10 @@ defineExpose({
 
 <script lang="ts">
 export default {
-  name: 'BeForm'
+  name: 'BeForm',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

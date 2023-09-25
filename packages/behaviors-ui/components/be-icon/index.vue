@@ -34,7 +34,10 @@ const fontClass = computed(() => {
 
 <script lang="ts">
 export default {
-  name: 'BeIcon'
+  name: 'BeIcon',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

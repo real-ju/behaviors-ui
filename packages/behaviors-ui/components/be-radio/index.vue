@@ -55,7 +55,10 @@ const selectItem = (item: RadioOption) => {
 
 <script lang="ts">
 export default {
-  name: 'BeRadio'
+  name: 'BeRadio',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

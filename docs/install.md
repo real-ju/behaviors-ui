@@ -49,3 +49,15 @@ app.use(BehaviorsUI);
 import { Button } from 'behaviors-ui';
 app.use(Button); // 或者 app.component('be-button', Button);
 ```
+
+### 配置 mergeVirtualHostAttributes
+
+由于 [Attributes 透传机制](/note#attributes-透传机制) 在各平台表现不一致，需要在`manifest.json`中配置：
+
+```json
+{
+  "mp-weixin": {
+    "mergeVirtualHostAttributes": true
+  }
+}
+```

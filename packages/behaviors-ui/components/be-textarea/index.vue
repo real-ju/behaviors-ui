@@ -102,7 +102,10 @@ const onBlur = (event: any) => {
 
 <script lang="ts">
 export default {
-  name: 'BeTextarea'
+  name: 'BeTextarea',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

@@ -44,7 +44,10 @@ beFormContext.addField({
 
 <script lang="ts">
 export default {
-  name: 'BeFormItem'
+  name: 'BeFormItem',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

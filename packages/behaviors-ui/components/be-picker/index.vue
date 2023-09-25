@@ -527,7 +527,10 @@ const parseTime = (value: string, rule: string) => {
 
 <script lang="ts">
 export default {
-  name: 'BePicker'
+  name: 'BePicker',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

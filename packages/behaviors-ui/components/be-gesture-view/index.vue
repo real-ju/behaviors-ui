@@ -81,7 +81,10 @@ const onTouchmove = (event: any) => {
 
 <script lang="ts">
 export default {
-  name: 'BeGestureView'
+  name: 'BeGestureView',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

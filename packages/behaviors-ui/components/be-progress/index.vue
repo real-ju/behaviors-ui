@@ -30,7 +30,10 @@ const percent = computed(() => {
 
 <script lang="ts">
 export default {
-  name: 'BeProgress'
+  name: 'BeProgress',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

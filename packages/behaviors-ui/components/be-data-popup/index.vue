@@ -105,9 +105,10 @@ const confirm = () => {
 <script lang="ts">
 export default {
   name: 'BeDataPopup',
-  // 微信小程序如果需要修改子组件样式则配置此项
+  // 微信小程序自定义组件如果需要穿透子组件样式则配置此项
   options: {
-    styleIsolation: 'shared' // uni组件的默认值是apply-shared
+    styleIsolation: 'shared', // uni组件的默认值是apply-shared
+    virtualHost: true
   }
 };
 </script>

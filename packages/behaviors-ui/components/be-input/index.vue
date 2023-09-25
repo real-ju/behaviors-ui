@@ -177,7 +177,10 @@ const onBlur = (event: any) => {
 
 <script lang="ts">
 export default {
-  name: 'BeInput'
+  name: 'BeInput',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 

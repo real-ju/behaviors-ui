@@ -78,7 +78,10 @@ const displayStyle = computed(() => {
 
 <script lang="ts">
 export default {
-  name: 'BeViewLoading'
+  name: 'BeViewLoading',
+  options: {
+    virtualHost: true
+  }
 };
 </script>
 
