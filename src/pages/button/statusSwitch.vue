@@ -38,43 +38,41 @@ const switchStatus = () => {
 
 <style lang="scss" scoped>
 .button-status-switch-page {
-  .playground-content {
-    width: 100%;
+  width: 100%;
+  display: flex;
+
+  .button-1,
+  .button-2 {
+    width: 80px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #4a68cc;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #ffffff;
+  }
 
-    .button-1,
-    .button-2 {
-      width: 80px;
-      height: 30px;
-      border-radius: 8px;
-      background-color: #4a68cc;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-      color: #ffffff;
+  .button-1 {
+    &:active {
+      background-color: darken(#4a68cc, 20%);
     }
 
-    .button-1 {
-      &:active {
-        background-color: darken(#4a68cc, 20%);
-      }
-
-      &.disabled {
-        background-color: #aaaaaa;
-      }
-
-      .loading-icon {
-        width: 16px;
-        height: 16px;
-        animation: uni-loading 1s linear infinite;
-        margin-right: 6rpx;
-      }
+    &.disabled {
+      background-color: #aaaaaa;
     }
 
-    .button-2 {
-      margin-left: 10px;
+    .loading-icon {
+      width: 16px;
+      height: 16px;
+      animation: uni-loading 1s linear infinite;
+      margin-right: 6rpx;
     }
+  }
+
+  .button-2 {
+    margin-left: 10px;
   }
 }
 </style>
