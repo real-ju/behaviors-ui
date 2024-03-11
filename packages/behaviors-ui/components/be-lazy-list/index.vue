@@ -356,6 +356,9 @@ const reset = (silent = false) => {
  * @param clear 下拉后是否立即清空列表数据（重置v-model值）
  */
 const refreshData = (clear = false) => {
+  if (triggered.value) {
+    return;
+  }
   triggered.value = true;
   if (ready.value) {
     if (clear) {
