@@ -160,7 +160,7 @@
 import type { PropType } from 'vue';
 import type { Recordable } from '../../types';
 
-import { ref, computed } from 'vue';
+import { ref, computed, nextTick } from 'vue';
 import BeIcon from '../be-icon/index.vue';
 import BeViewLoading from '../be-view-loading/index.vue';
 import assetsUrlEmpty from './assets/empty.png';
