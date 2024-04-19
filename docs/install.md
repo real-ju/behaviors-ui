@@ -8,7 +8,7 @@
 
 ## 项目环境要求
 
-- uni-app Vue3+TS 版本
+- uni-app Vue3+TS 版本（墙裂推荐使用[uni-app-boot](https://github.com/real-ju/uni-app-boot)搭建项目）
 - Sass
 
 ## NPM 安装
