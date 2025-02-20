@@ -1,0 +1,1 @@
+import{_ as s,c as i,o as a,a1 as t}from"./chunks/framework.Bgiy4YwT.js";const g=JSON.parse('{"title":"注意事项","description":"","frontmatter":{},"headers":[],"relativePath":"note.md","filePath":"note.md"}'),e={name:"note.md"},l=t("",20),n=[l];function p(h,k,o,r,d,c){return a(),i("div",null,n)}const u=s(e,[["render",p]]);export{g as __pageData,u as default};
